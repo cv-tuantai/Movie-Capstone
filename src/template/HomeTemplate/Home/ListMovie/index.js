@@ -15,7 +15,7 @@ export default function ListMovie() {
   const renderListMovie = () => {
     if (loading) return <div>Loading...</div>;
     return data?.map((movie) => {
-      return <MovieItem key={movie.maPhim} />;
+      return <MovieItem key={movie.maPhim} movie={movie} />;
     });
   };
 
