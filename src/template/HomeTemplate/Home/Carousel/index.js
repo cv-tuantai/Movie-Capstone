@@ -1,0 +1,39 @@
+import React, { useEffect } from "react";
+import { Carousel } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { actGetCarousel } from "../../../../redux/actions/CarouselAction";
+
+export default function HomeCarousel() {
+  const data = useSelector((state) => state.CarouselReducer.data);
+  const loading = useSelector((state) => state.CarouselReducer.loading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(actGetCarousel());
+  }, []);
+
+  const contentStyle = {
+    height: "700px",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  };
+
+  const renderCarousel = () => {
+    if (loading) return <div>Loading...</div>;
+    return data?.map((item) => {
+      return (
+        <div key={item.maBanner}>
+          <div
+            style={{ ...contentStyle, backgroundImage: `url(${item.hinhAnh})` }}
+          ></div>
+        </div>
+      );
+    });
+  };
+
+  return (
+    <div>
+      <Carousel effect="fade">{renderCarousel()}</Carousel>
+    </div>
+  );
+}
