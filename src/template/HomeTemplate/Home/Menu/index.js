@@ -1,58 +1,64 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Tabs } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { actGetTheater } from "../../../../redux/actions/TheaterAction";
 
-const { TabPane } = Tabs;
+const Menu = () => {
+  const data = useSelector((state) => state.TheaterReducer.data);
+  const loading = useSelector((state) => state.TheaterReducer.loading);
+  const dispatch = useDispatch();
 
-export default class Demo extends React.Component {
-  state = {
-    tabPosition: "left",
-  };
+  useEffect(() => {
+    dispatch(actGetTheater());
+  }, []);
 
-  changeTabPosition = (e) => {
-    this.setState({ tabPosition: e.target.value });
-  };
+  if (loading) return <div>Loading...</div>;
 
-  render() {
-    const { tabPosition } = this.state;
+  const renderListTheater = () => {
     return (
-      <>
-        <Tabs tabPosition={tabPosition}>
-          <TabPane
-            tab={
+      <Tabs
+        tabPosition="left"
+        items={data?.map((theater, index) => {
+          return {
+            label: (
               <img
-                src="https://picsum.photos/200"
                 className="rounded-full"
-                width="50"
+                width={50}
+                src={theater.logo}
+                alt={index}
               />
-            }
-            key="1"
-          ></TabPane>
-          <TabPane
-            tab={
-              <img
-                src="https://picsum.photos/200"
-                className="rounded-full"
-                width="50"
+            ),
+            key: index,
+            children: (
+              <Tabs
+                tabPosition="left"
+                items={theater.lstCumRap?.map((item, index) => {
+                  return {
+                    label: (
+                      <div className="flex">
+                        <img
+                          width={50}
+                          src="https://s3img.vcdn.vn/123phim/2018/09/ddc-dong-da-15379624326697.jpg"
+                          alt={index}
+                        />
+                        <div className="ml-3">
+                          {item.tenCumRap}
+                          <p className="text-red-600 text-left">Detail</p>
+                        </div>
+                      </div>
+                    ),
+                    key: index,
+                    children: item.tenCumRap,
+                  };
+                })}
               />
-            }
-            key="2"
-          >
-            Content of Tab 2
-          </TabPane>
-          <TabPane
-            tab={
-              <img
-                src="https://picsum.photos/200"
-                className="rounded-full"
-                width="50"
-              />
-            }
-            key="3"
-          >
-            Content of Tab 3
-          </TabPane>
-        </Tabs>
-      </>
+            ),
+          };
+        })}
+      />
     );
-  }
-}
+  };
+
+  return <>{renderListTheater()}</>;
+};
+export default Menu;

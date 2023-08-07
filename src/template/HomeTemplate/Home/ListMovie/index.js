@@ -16,13 +16,16 @@ export default function ListMovie() {
 
   const renderListMovie = () => {
     if (loading) return <div>Loading...</div>;
-    return data?.map((movie) => {
-      if (mode === "showing" && movie.dangChieu) {
-        return <MovieItem key={movie.maPhim} movie={movie} />;
-      } else if (mode === "upcoming" && movie.sapChieu) {
-        return <MovieItem key={movie.maPhim} movie={movie} />;
-      }
-    });
+
+    const movieToShow = data?.filter(
+      (movie) =>
+        (mode === "showing" && movie.dangChieu) ||
+        (mode === "upcoming" && movie.sapChieu),
+    );
+
+    return movieToShow?.map((movie) => (
+      <MovieItem key={movie.maPhim} movie={movie} />
+    ));
   };
 
   return (

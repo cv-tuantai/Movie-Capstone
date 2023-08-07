@@ -22,6 +22,11 @@ export default function MovieItem(props) {
           <h1 className="title-font sm:text-2xl text-xl font-medium text-white mb-3 mt-3">
             {movie.tenPhim}
           </h1>
+          <p className="leading-relaxed mb-3">
+            {movie.moTa.length > 70
+              ? `${movie.moTa.slice(0, 70)}...`
+              : movie.moTa}
+          </p>
           <div className="button-container">
             <Button danger className="text-xl font-medium mr-5" size="large">
               CHI TIẾT
