@@ -6,14 +6,14 @@ export default function MovieItem(props) {
   const { movie } = props;
 
   return (
-    <div className="p-2 lg:w-1/4 ">
-      <div className="h-full bg-gray-100 bg-opacity-75 px-2 pt-2 pb-5 rounded-lg overflow-hidden text-center relative card-container">
+    <div className="p-2 2xl:w-1/5 lg:w-1/4 md:w-1/3 w-1/2">
+      <div className="bg-gray-100 bg-opacity-75 rounded-lg overflow-hidden text-center relative card-container">
         <img
           src={movie.hinhAnh}
           alt={movie.tenPhim}
           style={{
-            height: "400px",
-            width: "100%",
+            height: "350px",
+            width: "300px",
             objectFit: "cover",
             objectPosition: "center center",
           }}
@@ -22,14 +22,9 @@ export default function MovieItem(props) {
           <h1 className="title-font sm:text-2xl text-xl font-medium text-white mb-3 mt-3">
             {movie.tenPhim}
           </h1>
-          <p className="leading-relaxed mb-3">
-            {movie.moTa.length > 70
-              ? `${movie.moTa.slice(0, 70)}...`
-              : movie.moTa}
-          </p>
           <div className="button-container">
             <Button danger className="text-xl font-medium mr-5" size="large">
-              CHI TIẾT
+              XEM CHI TIẾT
             </Button>
             <Button
               type="primary"

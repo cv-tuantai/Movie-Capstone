@@ -13,7 +13,7 @@ export default function HomeCarousel() {
   }, []);
 
   const contentStyle = {
-    height: "700px",
+    height: "550px",
     backgroundSize: "cover",
     backgroundPosition: "center",
   };
@@ -33,7 +33,9 @@ export default function HomeCarousel() {
 
   return (
     <div>
-      <Carousel effect="fade">{renderCarousel()}</Carousel>
+      <Carousel effect="fade" autoplay pauseOnHover={false}>
+        {renderCarousel()}
+      </Carousel>
     </div>
   );
 }

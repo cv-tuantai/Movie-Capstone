@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actListMovie } from "../../../../redux/actions/ListMovieAction";
 import MovieItem from "./MovieItem";
+import { Carousel } from "antd";
 
 export default function ListMovie() {
   const data = useSelector((state) => state.ListMovieReducer.data);
@@ -30,7 +31,7 @@ export default function ListMovie() {
 
   return (
     <section className="text-gray-600 body-font">
-      <div className="container px-5 py-24 mx-auto">
+      <div className="container xl:px-28 px-5 py-12 mx-auto">
         <button
           type="button"
           className={`px-8 py-3 font-semibold border rounded mr-3 ${
