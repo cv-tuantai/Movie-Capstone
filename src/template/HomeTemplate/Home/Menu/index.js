@@ -119,6 +119,6 @@ const Menu = () => {
     );
   };
 
-  return <>{renderListTheater()}</>;
+  return <div className="hidden lg:block">{renderListTheater()}</div>;
 };
 export default Menu;
