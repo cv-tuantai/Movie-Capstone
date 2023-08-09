@@ -19,13 +19,13 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-400 body-font">
-      <div className="container px-5 py-8 mx-auto">
+      <div className="container lg:px-36 py-8 mx-auto">
         <div className="flex flex-wrap text-center order-first">
           <div className="md:w-1/2 w-full px-4">
             <h2 className="title-font font-medium text-white hover:text-red-500 tracking-widest text-2xl mb-3">
               PARTNER
             </h2>
-            <nav className="list-none sm:mb-4 md:mb-0 grid grid-cols-6 gap-14">
+            <nav className="mb-4 md:mb-0 grid grid-cols-6 gap-8">
               {renderPartner()}
             </nav>
           </div>
@@ -45,14 +45,14 @@ export default function Footer() {
                 />
               </div>
               <button className="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
-                Button
+                Send
               </button>
             </div>
           </div>
         </div>
       </div>
       <div className="bg-gray-600">
-        <div className="container px-5 py-2 mx-auto flex items-center sm:flex-row flex-col">
+        <div className="container px-16 py-2 mx-auto flex items-center sm:flex-row flex-col">
           <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
             <img
               src="https://i.imgur.com/lC22izJ.png"

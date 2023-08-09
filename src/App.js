@@ -1,27 +1,15 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomeTemplate from "./template/HomeTemplate";
-import Home from "./template/HomeTemplate/Home";
-import Contact from "./pages/Contact";
-import News from "./pages/News";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+import { BrowserRouter, Routes } from "react-router-dom";
+import { Suspense } from "react";
+import renderRoutes from "./routes";
 
 function App() {
   return (
-    <div className="App">
+    <Suspense fallback={<div>Loading...</div>}>
       <BrowserRouter>
-        <Routes>
-          <Route path="" element={<HomeTemplate />}>
-            <Route path="" element={<Home />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="news" element={<News />} />
-          </Route>
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
-        </Routes>
+        <Routes>{renderRoutes()}</Routes>
       </BrowserRouter>
-    </div>
+    </Suspense>
   );
 }
 

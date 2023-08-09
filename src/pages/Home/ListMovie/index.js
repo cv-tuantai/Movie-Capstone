@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actListMovie } from "../../../../redux/actions/ListMovieAction";
+import { actListMovie } from "../../../redux/actions/ListMovieAction";
 import MovieItem from "./MovieItem";
-import { Carousel } from "antd";
 
 export default function ListMovie() {
   const data = useSelector((state) => state.ListMovieReducer.data);

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Tabs } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { actGetTheater } from "../../../../redux/actions/TheaterAction";
+import { actGetTheater } from "../../../redux/actions/TheaterAction";
 import { NavLink } from "react-router-dom";
 import moment from "moment";
 
