@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 export default function Header(props) {
   return (
     <div>
-      <header className="p-3 bg-gray-800 bg-opacity-40 text-white fixed w-full z-10">
+      <header className="p-3 bg-gray-800 bg-opacity-70 text-white fixed w-full z-10">
         <div className="container flex justify-between h-10 lg:px-16 px-6 mx-auto">
           <NavLink
             rel="noopener noreferrer"

@@ -6,8 +6,7 @@ import { NavLink } from "react-router-dom";
 import moment from "moment";
 
 const Menu = () => {
-  const data = useSelector((state) => state.TheaterReducer.data);
-  const loading = useSelector((state) => state.TheaterReducer.loading);
+  const { data, loading } = useSelector((state) => state.TheaterReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {

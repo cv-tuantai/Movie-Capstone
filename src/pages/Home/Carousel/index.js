@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { actGetCarousel } from "../../../redux/actions/CarouselAction";
 
 export default function HomeCarousel() {
-  const data = useSelector((state) => state.CarouselReducer.data);
-  const loading = useSelector((state) => state.CarouselReducer.loading);
+  const { data, loading } = useSelector((state) => state.CarouselReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -4,8 +4,7 @@ import { actListMovie } from "../../../redux/actions/ListMovieAction";
 import MovieItem from "./MovieItem";
 
 export default function ListMovie() {
-  const data = useSelector((state) => state.ListMovieReducer.data);
-  const loading = useSelector((state) => state.ListMovieReducer.loading);
+  const { data, loading } = useSelector((state) => state.ListMovieReducer);
   const dispatch = useDispatch();
 
   const [mode, setMode] = useState("showing");
