@@ -2,14 +2,14 @@
   display: flex;
   position: relative;
   /* Setting the size of the upper layer to 80% of the screen size*/
-  height: 500px;
+  height: 600px;
   width: 100%;
   /* align-items: center;
   justify-content: space-between; */
   /* padding: 64px; */
 
   /*the alpha value controls the transparency*/
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.5);
 
   /* This controls the blurring effect*/
   backdrop-filter: blur(7.5px);
