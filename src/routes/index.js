@@ -30,7 +30,11 @@ const routes = [
   },
   {
     path: "login",
-    element: lazy(() => import("../pages/Login")),
+    element: lazy(() => import("../template/UserTemplate")),
+  },
+  {
+    path: "checkout/:id",
+    element: lazy(() => import("../template/CheckoutTemplate")),
   },
 ];
 

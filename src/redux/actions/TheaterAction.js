@@ -6,7 +6,7 @@ export const actGetTheater = () => {
     dispatch(actGetTheaterRequest());
 
     api
-      .get("QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP01")
+      .get("QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP03")
       .then((result) => {
         console.log(result);
         if (result.data.statusCode === 200) {

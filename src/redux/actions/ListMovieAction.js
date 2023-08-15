@@ -6,7 +6,7 @@ export const actListMovie = () => {
     dispatch(actListMovieRequest());
 
     api
-      .get("QuanLyPhim/LayDanhSachPhim?maNhom=GP04")
+      .get("QuanLyPhim/LayDanhSachPhim?maNhom=GP09")
       .then((result) => {
         console.log(result);
         if (result.data.statusCode === 200) {
