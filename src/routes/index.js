@@ -4,37 +4,37 @@ import { lazy } from "react";
 const routes = [
   {
     path: "",
-    element: lazy(() => import("../template/HomeTemplate")),
+    element: lazy(() => import("../pages/HomeTemplate")),
     nested: [
       {
         path: "",
-        element: lazy(() => import("../pages/Home")),
+        element: lazy(() => import("../pages/HomeTemplate/Home")),
       },
       {
         path: "contact",
-        element: lazy(() => import("../pages/Contact")),
+        element: lazy(() => import("../pages/HomeTemplate/Contact")),
       },
       {
         path: "news",
-        element: lazy(() => import("../pages/News")),
+        element: lazy(() => import("../pages/HomeTemplate/News")),
       },
       {
         path: "detail/:id",
-        element: lazy(() => import("../pages/Detail")),
+        element: lazy(() => import("../pages/HomeTemplate/Detail")),
       },
     ],
   },
   {
     path: "register",
-    element: lazy(() => import("../pages/Register")),
+    element: lazy(() => import("../pages/UserTemplate/Register")),
   },
   {
     path: "login",
-    element: lazy(() => import("../template/UserTemplate")),
+    element: lazy(() => import("../pages/UserTemplate")),
   },
   {
     path: "checkout/:id",
-    element: lazy(() => import("../template/CheckoutTemplate")),
+    element: lazy(() => import("../pages/CheckoutTemplate")),
   },
 ];
 

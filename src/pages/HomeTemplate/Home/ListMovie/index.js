@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actListMovie } from "../../../redux/actions/ListMovieAction";
+import { actListMovie } from "../../../../redux/actions/ListMovieAction";
 import MovieItem from "./MovieItem";
 
 export default function ListMovie() {

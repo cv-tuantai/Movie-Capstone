@@ -3,7 +3,7 @@ import "./style.css";
 import "./circle.css";
 import { NavLink, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { actDetailMovie } from "../../redux/actions/DetailMovieAction";
+import { actDetailMovie } from "../../../redux/actions/DetailMovieAction";
 import moment from "moment";
 import { Rate, Tabs } from "antd";
 

@@ -1,9 +1,9 @@
-import cgv from "../../../assets/footer-icon-1.png";
-import bhd from "../../../assets/footer-icon-2.png";
-import galaxy from "../../../assets/footer-icon-3.png";
-import star from "../../../assets/footer-icon-4.png";
-import lotte from "../../../assets/footer-icon-5.png";
-import mega from "../../../assets/footer-icon-6.png";
+import cgv from "../../../../assets/footer-icon-1.png";
+import bhd from "../../../../assets/footer-icon-2.png";
+import galaxy from "../../../../assets/footer-icon-3.png";
+import star from "../../../../assets/footer-icon-4.png";
+import lotte from "../../../../assets/footer-icon-5.png";
+import mega from "../../../../assets/footer-icon-6.png";
 
 export const data = [
   {
