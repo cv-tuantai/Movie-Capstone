@@ -56,7 +56,7 @@ export default function Detail() {
                       {cum.lichChieuPhim?.slice(0, 8).map((lich) => {
                         return (
                           <NavLink
-                            to="/"
+                            to={`/checkout/${lich.maLichChieu}`}
                             className="p-2 font-semibold rounded-md border border-slate-200 text-red-600"
                             key={lich.maLichChieu}
                           >

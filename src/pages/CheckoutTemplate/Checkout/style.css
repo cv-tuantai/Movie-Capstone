@@ -1,0 +1,45 @@
+.ghe {
+  /* ghế thường */
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  background-color: rgb(123, 122, 122);
+  color: #fff;
+  font-size: 12px;
+}
+
+.gheDaDat {
+  background-color: rgb(193, 67, 67);
+  cursor: no-drop;
+}
+
+.gheDangDat {
+  background-color: rgb(18, 176, 18) !important;
+}
+
+.gheVip {
+  background-color: rgb(229, 88, 49);
+}
+
+.gheDuocDat {
+  /*ghế được chính mình đặt */
+  background-color: rgb(246, 246, 246);
+  -webkit-box-shadow: -1px 2px 18px -6px orange;
+  box-shadow: -1px 2px 18px -6px orange;
+  color: orange !important;
+  border: 1px solid orange;
+}
+
+.screen {
+  border-bottom: 50px solid rgba(255, 159, 95, 0.7);
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  height: 100;
+  /* width: 80%; */
+  filter: drop-shadow(4px 30px 20px rgba(118, 83, 45, 0.5));
+  font-size: 25px;
+  color: #fff;
+}

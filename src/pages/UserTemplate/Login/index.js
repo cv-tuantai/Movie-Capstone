@@ -1,17 +1,43 @@
 import { useFormik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { actLogin } from "../../../redux/actions/LoginAction";
+import { useNavigate, Navigate } from "react-router-dom";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { error } = useSelector((state) => state.LoginReducer);
+
   const formik = useFormik({
     initialValues: {
       taiKhoan: "",
       matKhau: "",
     },
     onSubmit: (values) => {
-      console.log("value", values);
+      dispatch(actLogin(values, navigate));
     },
   });
+
+  if (localStorage.getItem("user")) {
+    return <Navigate replace to="/" />;
+  }
+
+  const renderError = () => {
+    return (
+      error && (
+        <div
+          className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+          role="alert"
+        >
+          <p className="font-bold">Be Warned</p>
+          <p>{error.response.data.content}.</p>
+        </div>
+      )
+    );
+  };
+
   return (
     <div className="lg:flex">
       <div className="lg:w-1/2 xl:max-w-screen-sm">
@@ -91,9 +117,11 @@ export default function Login() {
                   className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                   placeholder="Enter your password"
                   name="matKhau"
+                  type="password"
                   onChange={formik.handleChange}
                 />
               </div>
+              {renderError()}
               <div className="mt-10">
                 <button
                   className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide

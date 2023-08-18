@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import Checkout from "./Checkout";
 
 export default function CheckoutTemplate() {
-  if (!localStorage.getItem("AdminUser")) {
+  if (!localStorage.getItem("user")) {
     return <Navigate to="/login" replace />;
   }
   return (

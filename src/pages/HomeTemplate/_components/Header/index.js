@@ -6,9 +6,9 @@ export default function Header(props) {
     <div>
       <header className="p-3 bg-gray-800 bg-opacity-70 text-white fixed w-full z-10">
         <div className="container flex justify-between h-10 lg:px-16 px-6 mx-auto">
-          <NavLink
+          <Link
             rel="noopener noreferrer"
-            to=""
+            to="/"
             aria-label="Back to homepage"
             className="flex items-center p-2"
           >
@@ -17,7 +17,7 @@ export default function Header(props) {
               alt=""
               className="w-3/5"
             />
-          </NavLink>
+          </Link>
           <ul className="items-stretch hidden space-x-3 lg:flex">
             <li className="flex">
               <NavLink
@@ -63,9 +63,11 @@ export default function Header(props) {
             <Link to="/login">
               <button className="self-center px-8 py-3 rounded">Log in</button>
             </Link>
-            <button className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">
-              Register
-            </button>
+            <Link to="/register">
+              <button className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">
+                Register
+              </button>
+            </Link>
           </div>
           <button className="p-4 lg:hidden">
             <svg
