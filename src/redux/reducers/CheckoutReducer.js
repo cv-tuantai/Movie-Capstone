@@ -4,6 +4,7 @@ const initalState = {
   loading: false,
   data: null,
   error: null,
+  selectedSeats: [],
 };
 
 const CheckoutReducer = (state = initalState, action) => {
@@ -24,6 +25,22 @@ const CheckoutReducer = (state = initalState, action) => {
       state.loading = false;
       state.data = null;
       state.error = action.payload;
+      return { ...state };
+
+    case ActionTypes.SELECTED_SEATS:
+      let selectedSeatsClone = [...state.selectedSeats];
+
+      const index = selectedSeatsClone.findIndex(
+        (selectedSeat) => selectedSeat.maGhe === action.payload.maGhe,
+      );
+
+      if (index !== -1) {
+        selectedSeatsClone.splice(index, 1);
+      } else {
+        selectedSeatsClone.push(action.payload);
+      }
+
+      state.selectedSeats = selectedSeatsClone;
       return { ...state };
 
     default:

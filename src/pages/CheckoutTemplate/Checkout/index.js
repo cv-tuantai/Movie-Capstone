@@ -1,14 +1,19 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
-import { actCheckout } from "../../../redux/actions/CheckoutAction";
+import {
+  actCheckout,
+  actSelectedSeats,
+} from "../../../redux/actions/CheckoutAction";
 import { useParams } from "react-router-dom";
 import { StopOutlined } from "@ant-design/icons";
 
 export default function Checkout() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { loading, data } = useSelector((state) => state.CheckoutReducer);
+  const { loading, data, selectedSeats } = useSelector(
+    (state) => state.CheckoutReducer,
+  );
 
   useEffect(() => {
     dispatch(actCheckout(id));
@@ -20,9 +25,21 @@ export default function Checkout() {
     return data?.danhSachGhe.map((ghe) => {
       const gheVip = ghe.loaiGhe === "Vip" ? "gheVip" : "";
       const gheDaDat = ghe.daDat === true ? "gheDaDat" : "";
+
+      const indexGheDangDat = selectedSeats.findIndex(
+        (gheDangDat) => gheDangDat.maGhe === ghe.maGhe,
+      );
+      const gheDangDat = indexGheDangDat !== -1 ? "gheDangDat" : "";
+
       return (
-        <>
-          <button key={ghe.tenGhe} className={`ghe ${gheVip} ${gheDaDat}`}>
+        <Fragment key={ghe.tenGhe}>
+          <button
+            onClick={() => {
+              dispatch(actSelectedSeats(ghe));
+            }}
+            disabled={ghe.daDat}
+            className={`ghe ${gheVip} ${gheDaDat} ${gheDangDat}`}
+          >
             {ghe.daDat === true ? (
               <StopOutlined style={{ lineHeight: "35px" }} />
             ) : (
@@ -30,7 +47,7 @@ export default function Checkout() {
             )}
           </button>
           {ghe.tenGhe % 16 === 0 ? <br /> : ""}
-        </>
+        </Fragment>
       );
     });
   };
@@ -92,13 +109,31 @@ export default function Checkout() {
               <div className="flex justify-between my-4">
                 <span>Selected Seats:</span>
                 <span className="text-green-600 font-semibold">
-                  Ghế 18, Ghế 19, Ghế 06
+                  {selectedSeats
+                    ?.slice() //clone mảng
+                    .sort((a, b) => a.stt - b.stt) //sort theo thứ tự
+                    .map((gheDangDat, index, arr) => {
+                      return (
+                        // index và arr để kiểm tra ghế cuối, nếu chưa phải ghế cuối thì thêm dấu phẩy
+                        <Fragment key={gheDangDat.stt}>
+                          {gheDangDat.stt}
+                          {index < arr.length - 1 ? ", " : ""}
+                        </Fragment>
+                      );
+                    })}
                 </span>
               </div>
               <hr className="my-2" />
               <div className="flex justify-between my-5 text-xl">
                 <span className="font-semibold">Total</span>
-                <span className="font-semibold text-green-600">$21.98</span>
+                <span className="font-semibold text-green-600">
+                  {selectedSeats
+                    ?.reduce((total, seat) => {
+                      return (total += seat.giaVe);
+                    }, 0)
+                    .toLocaleString()}{" "}
+                  VND
+                </span>
               </div>
               <button className="bg-red-700 hover:bg-red-500 duration-300 text-white text-2xl py-2 px-4 rounded-lg mt-4 w-full">
                 Checkout

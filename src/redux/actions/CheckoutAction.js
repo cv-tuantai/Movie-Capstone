@@ -36,3 +36,10 @@ const actCheckoutFail = (error) => {
     payload: error,
   };
 };
+
+export const actSelectedSeats = (data) => {
+  return {
+    type: ActionTypes.SELECTED_SEATS,
+    payload: data,
+  };
+};
