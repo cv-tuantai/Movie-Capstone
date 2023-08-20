@@ -34,8 +34,8 @@ export default function ListMovie() {
           type="button"
           className={`px-8 py-3 font-semibold border rounded mr-3 ${
             mode === "showing"
-              ? "bg-gray-800 text-white"
-              : "bg-white text-gray-800 border-gray-800"
+              ? "bg-gray-800 text-white hover:bg-gray-600"
+              : "bg-white text-gray-800 border-gray-800 hover:bg-slate-200"
           }  `}
           onClick={() => {
             setMode("showing");
@@ -47,8 +47,8 @@ export default function ListMovie() {
           type="button"
           className={`px-8 py-3 font-semibold border rounded ${
             mode === "upcoming"
-              ? "bg-gray-800 text-white"
-              : "bg-white text-gray-800 border-gray-800"
+              ? "bg-gray-800 text-white hover:bg-gray-600"
+              : "bg-white text-gray-800 border-gray-800 hover:bg-slate-200"
           }`}
           onClick={() => {
             setMode("upcoming");

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./style.css";
 import "./circle.css";
-import { NavLink, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { actDetailMovie } from "../../../redux/actions/DetailMovieAction";
 import moment from "moment";
@@ -55,13 +55,13 @@ export default function Detail() {
                     <div className="grid grid-cols-4 gap-1">
                       {cum.lichChieuPhim?.slice(0, 8).map((lich) => {
                         return (
-                          <NavLink
+                          <Link
                             to={`/checkout/${lich.maLichChieu}`}
                             className="p-2 font-semibold rounded-md border border-slate-200 text-red-600"
                             key={lich.maLichChieu}
                           >
                             {moment(lich.ngayChieuGioChieu).format("hh:mm A")}
-                          </NavLink>
+                          </Link>
                         );
                       })}
                     </div>
@@ -108,7 +108,7 @@ export default function Detail() {
                         : data.moTa}
                     </p>
                     <p className="text-white mt-3">
-                      Release date:{" "}
+                      Ngày chiếu:{" "}
                       {moment(data.ngayKhoiChieu).format("MM-DD-YYYY")}
                     </p>
                   </div>

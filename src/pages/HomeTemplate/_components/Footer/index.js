@@ -17,8 +17,8 @@ export default function Footer() {
       <div className="container lg:px-36 py-8 mx-auto">
         <div className="flex flex-wrap text-center order-first">
           <div className="md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium hover:text-red-500 tracking-widest text-2xl mb-3">
-              PARTNER
+            <h2 className="title-font font-medium hover:text-red-500 text-2xl mb-3">
+              ĐỐI TÁC
             </h2>
             <nav className="mb-4 md:mb-0 grid grid-cols-6 gap-8">
               {renderPartner()}
@@ -26,8 +26,8 @@ export default function Footer() {
           </div>
 
           <div className="md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium hover:text-red-500 text-2xl tracking-widest mb-3">
-              SUBSCRIBE
+            <h2 className="title-font font-medium hover:text-red-500 text-2xl mb-3">
+              ĐĂNG KÝ THEO DÕI
             </h2>
             <div className="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end">
               <div className="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">

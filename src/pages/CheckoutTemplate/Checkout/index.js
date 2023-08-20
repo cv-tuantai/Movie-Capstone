@@ -7,7 +7,8 @@ import {
 } from "../../../redux/actions/CheckoutAction";
 import { actBookingInfo } from "../../../redux/actions/BookingInfoAction";
 import { useParams } from "react-router-dom";
-import { CloseOutlined, UserOutlined } from "@ant-design/icons";
+import { CheckOutlined, CloseOutlined, UserOutlined } from "@ant-design/icons";
+import { Tabs } from "antd";
 
 export default function Checkout() {
   const dispatch = useDispatch();
@@ -67,30 +68,36 @@ export default function Checkout() {
           {/* Chose seat */}
           <div className="md:w-2/3">
             <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-              <h3 className="text-center mt-1 text-lg">Screen</h3>
+              <h3 className="text-center mt-1 text-lg">Màn hình</h3>
               <div className="screen justify-center mb-8"></div>
               {renderSeats()}
               <div className="flex justify-between">
                 <div className="flex items-center">
-                  <span>Unreserved seat</span>
-                  <button className="ghe"></button>
+                  <span>Ghế chưa đặt</span>
+                  <button className="ghe">
+                    <CheckOutlined />
+                  </button>
                 </div>
                 <div className="flex items-center">
-                  <span>Reserved seat</span>
+                  <span>Ghế đã đặt</span>
                   <button className="ghe gheDaDat">
                     <CloseOutlined />
                   </button>
                 </div>
                 <div className="flex items-center">
-                  <span>VIP seat</span>
-                  <button className="ghe gheVip"></button>
+                  <span>Ghế vip</span>
+                  <button className="ghe gheVip">
+                    <CheckOutlined />
+                  </button>
                 </div>
                 <div className="flex items-center">
-                  <span>Seat being reserved</span>
-                  <button className="ghe gheDangDat"></button>
+                  <span>Ghế đang đặt</span>
+                  <button className="ghe gheDangDat">
+                    <CheckOutlined />
+                  </button>
                 </div>
                 <div className="flex items-center">
-                  <span>Seat you reserved</span>
+                  <span>Ghế bạn đã đặt</span>
                   <button className="ghe gheMinhDat">
                     <UserOutlined />
                   </button>
@@ -103,45 +110,45 @@ export default function Checkout() {
           <div className="md:w-1/3">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl text-center font-semibold mb-6">
-                Booking info
+                Thông tin đặt vé
               </h2>
               <div className="flex justify-between my-4">
-                <span>Cinema:</span>
+                <span>Cụm Rạp:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.tenCumRap}
                 </span>
               </div>
               <hr />
               <div className="flex justify-between my-4">
-                <span>Address:</span>
+                <span>Địa chỉ:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.diaChi}
                 </span>
               </div>
               <hr />
               <div className="flex justify-between my-4">
-                <span>Theater:</span>
+                <span>Rạp:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.tenRap}
                 </span>
               </div>
               <hr />
               <div className="flex justify-between my-4">
-                <span>Showtime:</span>
+                <span>Ngày giờ chiếu:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.ngayChieu} - {data?.thongTinPhim.gioChieu}
                 </span>
               </div>
               <hr />
               <div className="flex justify-between my-4">
-                <span>Movie:</span>
+                <span>Tên Phim:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.tenPhim}
                 </span>
               </div>
               <hr />
               <div className="flex justify-between my-4">
-                <span>Seats:</span>
+                <span>Ghế:</span>
                 <span className="text-green-600 font-semibold">
                   {selectedSeats
                     ?.slice() //clone mảng
@@ -159,14 +166,14 @@ export default function Checkout() {
               </div>
               <hr className="my-2" />
               <div className="flex justify-between my-5 text-xl">
-                <span className="font-semibold">Total</span>
+                <span className="font-semibold">Tổng tiền</span>
                 <span className="font-semibold text-green-600">
                   {selectedSeats
                     ?.reduce((total, seat) => {
                       return (total += seat.giaVe);
                     }, 0)
                     .toLocaleString()}{" "}
-                  VND
+                  VNĐ
                 </span>
               </div>
               <button
@@ -179,7 +186,7 @@ export default function Checkout() {
                 }}
                 className="bg-red-700 hover:bg-red-500 duration-300 text-white text-2xl py-2 px-4 rounded-lg mt-4 w-full"
               >
-                Checkout
+                Thanh toán
               </button>
             </div>
           </div>

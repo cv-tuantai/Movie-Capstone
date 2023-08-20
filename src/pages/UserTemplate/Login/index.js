@@ -84,17 +84,17 @@ export default function Login() {
             className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl
               xl:text-bold"
           >
-            Log in
+            Đăng nhập
           </h2>
           <div className="mt-12">
             <form onSubmit={formik.handleSubmit}>
               <div>
                 <div className="text-sm font-bold text-gray-700 tracking-wide">
-                  Username
+                  Tài khoản
                 </div>
                 <input
                   className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-                  placeholder="Enter your username"
+                  placeholder="Nhập tài khoản"
                   name="taiKhoan"
                   onChange={formik.handleChange}
                 />
@@ -102,20 +102,20 @@ export default function Login() {
               <div className="mt-8">
                 <div className="flex justify-between items-center">
                   <div className="text-sm font-bold text-gray-700 tracking-wide">
-                    Password
+                    Mật khẩu
                   </div>
                   <div>
                     <a
                       className="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800
                                   cursor-pointer"
                     >
-                      Forgot Password?
+                      Quên mật khẩu?
                     </a>
                   </div>
                 </div>
                 <input
                   className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-                  placeholder="Enter your password"
+                  placeholder="Nhập mật khẩu"
                   name="matKhau"
                   type="password"
                   onChange={formik.handleChange}
@@ -128,17 +128,17 @@ export default function Login() {
                           font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
                           shadow-lg"
                 >
-                  Log In
+                  Đăng nhập
                 </button>
               </div>
             </form>
             <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
-              Don't have an account ?{" "}
+              Chưa có tài khoản ?{" "}
               <Link
                 to="/register"
                 className="cursor-pointer text-indigo-600 hover:text-indigo-800"
               >
-                Sign up
+                Đăng ký
               </Link>
             </div>
           </div>

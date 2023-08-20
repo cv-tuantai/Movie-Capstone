@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "antd";
 import "./style.css";
 import { Link } from "react-router-dom";
 
@@ -23,21 +22,14 @@ export default function MovieItem(props) {
           <h1 className="title-font sm:text-2xl text-xl font-medium text-white mb-3 mt-3">
             {movie.tenPhim}
           </h1>
-          <div className="button-container">
-            <Link to={`/detail/${movie.maPhim}`}>
-              <Button danger className="text-xl font-medium mr-5" size="large">
-                XEM CHI TIẾT
-              </Button>
-            </Link>
-            <Button
-              type="primary"
-              danger
-              className="text-xl font-medium"
-              size="large"
+          <Link to={`/detail/${movie.maPhim}`}>
+            <button
+              type="button"
+              className="px-10 py-2 font-semibold rounded bg-red-600 text-white hover:bg-red-500 mb-5"
             >
               ĐẶT VÉ
-            </Button>
-          </div>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

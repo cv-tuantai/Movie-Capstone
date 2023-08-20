@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
-export default function Header(props) {
+export default function Header() {
   return (
     <div>
       <header className="p-3 bg-gray-800 bg-opacity-70 text-white fixed w-full z-10">
@@ -29,7 +29,7 @@ export default function Header(props) {
                     : "flex items-center px-4 -mb-1"
                 }
               >
-                Home
+                Trang chủ
               </NavLink>
             </li>
             <li className="flex">
@@ -42,7 +42,7 @@ export default function Header(props) {
                     : "flex items-center px-4 -mb-1"
                 }
               >
-                Contact
+                Liên hệ
               </NavLink>
             </li>
             <li className="flex">
@@ -55,17 +55,19 @@ export default function Header(props) {
                     : "flex items-center px-4 -mb-1"
                 }
               >
-                News
+                Tin tức
               </NavLink>
             </li>
           </ul>
           <div className="items-center flex-shrink-0 hidden lg:flex">
             <Link to="/login">
-              <button className="self-center px-8 py-3 rounded">Log in</button>
+              <button className="self-center px-8 py-3 rounded">
+                Đăng nhập
+              </button>
             </Link>
             <Link to="/register">
               <button className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">
-                Register
+                Đăng ký
               </button>
             </Link>
           </div>

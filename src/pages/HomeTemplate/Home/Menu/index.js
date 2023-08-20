@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Tabs } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { actGetTheater } from "../../../../redux/actions/TheaterAction";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import moment from "moment";
 
 const Menu = () => {
@@ -92,15 +92,15 @@ const Menu = () => {
                                 ?.slice(0, 8)
                                 .map((showtime) => {
                                   return (
-                                    <NavLink
+                                    <Link
                                       className="p-2 font-semibold rounded-md border border-slate-200 text-red-600"
-                                      to="/"
+                                      to={`/checkout/${showtime.maLichChieu}`}
                                       key={showtime.maLichChieu}
                                     >
                                       {moment(
                                         showtime.ngayChieuGioChieu,
                                       ).format("hh:mm A")}
-                                    </NavLink>
+                                    </Link>
                                   );
                                 })}
                             </div>
