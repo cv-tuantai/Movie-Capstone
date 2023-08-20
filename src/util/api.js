@@ -5,8 +5,8 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const accessToken = localStorage.getItem("UserAdmin")
-    ? JSON.parse(localStorage.getItem("UserAdmin")).accessToken
+  const accessToken = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).accessToken
     : "";
 
   config.headers = {

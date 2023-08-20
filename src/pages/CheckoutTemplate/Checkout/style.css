@@ -24,8 +24,7 @@
   background-color: rgb(229, 88, 49);
 }
 
-.gheDuocDat {
-  /*ghế được chính mình đặt */
+.gheMinhDat {
   background-color: rgb(246, 246, 246);
   -webkit-box-shadow: -1px 2px 18px -6px orange;
   box-shadow: -1px 2px 18px -6px orange;

@@ -5,8 +5,9 @@ import {
   actCheckout,
   actSelectedSeats,
 } from "../../../redux/actions/CheckoutAction";
+import { actBookingInfo } from "../../../redux/actions/BookingInfoAction";
 import { useParams } from "react-router-dom";
-import { StopOutlined } from "@ant-design/icons";
+import { CloseOutlined, UserOutlined } from "@ant-design/icons";
 
 export default function Checkout() {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ export default function Checkout() {
       );
       const gheDangDat = indexGheDangDat !== -1 ? "gheDangDat" : "";
 
+      const taiKhoan = JSON.parse(localStorage.getItem("user")).taiKhoan;
+      const gheMinhDat = taiKhoan === ghe.taiKhoanNguoiDat ? "gheMinhDat" : "";
+
       return (
         <Fragment key={ghe.tenGhe}>
           <button
@@ -38,10 +42,14 @@ export default function Checkout() {
               dispatch(actSelectedSeats(ghe));
             }}
             disabled={ghe.daDat}
-            className={`ghe ${gheVip} ${gheDaDat} ${gheDangDat}`}
+            className={`ghe ${gheVip} ${gheDaDat} ${gheDangDat} ${gheMinhDat}`}
           >
-            {ghe.daDat === true ? (
-              <StopOutlined style={{ lineHeight: "35px" }} />
+            {ghe.daDat ? (
+              gheMinhDat !== "" ? (
+                <UserOutlined />
+              ) : (
+                <CloseOutlined />
+              )
             ) : (
               ghe.tenGhe
             )}
@@ -62,6 +70,32 @@ export default function Checkout() {
               <h3 className="text-center mt-1 text-lg">Screen</h3>
               <div className="screen justify-center mb-8"></div>
               {renderSeats()}
+              <div className="flex justify-between">
+                <div className="flex items-center">
+                  <span>Unreserved seat</span>
+                  <button className="ghe"></button>
+                </div>
+                <div className="flex items-center">
+                  <span>Reserved seat</span>
+                  <button className="ghe gheDaDat">
+                    <CloseOutlined />
+                  </button>
+                </div>
+                <div className="flex items-center">
+                  <span>VIP seat</span>
+                  <button className="ghe gheVip"></button>
+                </div>
+                <div className="flex items-center">
+                  <span>Seat being reserved</span>
+                  <button className="ghe gheDangDat"></button>
+                </div>
+                <div className="flex items-center">
+                  <span>Seat you reserved</span>
+                  <button className="ghe gheMinhDat">
+                    <UserOutlined />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -72,7 +106,7 @@ export default function Checkout() {
                 Booking info
               </h2>
               <div className="flex justify-between my-4">
-                <span>Cinema Complex:</span>
+                <span>Cinema:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.tenCumRap}
                 </span>
@@ -100,14 +134,14 @@ export default function Checkout() {
               </div>
               <hr />
               <div className="flex justify-between my-4">
-                <span>Movie Title:</span>
+                <span>Movie:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.tenPhim}
                 </span>
               </div>
               <hr />
               <div className="flex justify-between my-4">
-                <span>Selected Seats:</span>
+                <span>Seats:</span>
                 <span className="text-green-600 font-semibold">
                   {selectedSeats
                     ?.slice() //clone mảng
@@ -135,7 +169,16 @@ export default function Checkout() {
                   VND
                 </span>
               </div>
-              <button className="bg-red-700 hover:bg-red-500 duration-300 text-white text-2xl py-2 px-4 rounded-lg mt-4 w-full">
+              <button
+                onClick={() => {
+                  const bookingInfo = {
+                    maLichChieu: id,
+                    danhSachVe: selectedSeats,
+                  };
+                  dispatch(actBookingInfo(bookingInfo));
+                }}
+                className="bg-red-700 hover:bg-red-500 duration-300 text-white text-2xl py-2 px-4 rounded-lg mt-4 w-full"
+              >
                 Checkout
               </button>
             </div>

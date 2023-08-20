@@ -22,9 +22,9 @@ export default function ListMovie() {
         (mode === "upcoming" && movie.sapChieu),
     );
 
-    return movieToShow?.map((movie) => (
-      <MovieItem key={movie.maPhim} movie={movie} />
-    ));
+    return movieToShow
+      ?.slice(0, 8)
+      .map((movie) => <MovieItem key={movie.maPhim} movie={movie} />);
   };
 
   return (

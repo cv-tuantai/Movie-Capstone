@@ -6,6 +6,7 @@ import TheaterReducer from "./reducers/TheaterReducer";
 import DetailMovieReducer from "./reducers/DetailMovieReducer";
 import LoginReducer from "./reducers/LoginReducer";
 import CheckoutReducer from "./reducers/CheckoutReducer";
+import BookingInfoReducer from "./reducers/BookingInfoReducer";
 
 const rootReducer = combineReducers({
   CarouselReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   DetailMovieReducer,
   LoginReducer,
   CheckoutReducer,
+  BookingInfoReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
