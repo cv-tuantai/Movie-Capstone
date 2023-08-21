@@ -9,8 +9,10 @@ import { actBookingInfo } from "../../../redux/actions/BookingInfoAction";
 import { useParams } from "react-router-dom";
 import { CheckOutlined, CloseOutlined, UserOutlined } from "@ant-design/icons";
 import { Tabs } from "antd";
+import { actGetUserInfo } from "../../../redux/actions/UserInfoAction";
+import moment from "moment";
 
-export default function Checkout() {
+function Checkout() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { loading, data, selectedSeats } = useSelector(
@@ -62,14 +64,14 @@ export default function Checkout() {
   };
 
   return (
-    <div className="bg-gray-100 h-screen py-3">
+    <div className="bg-gray-100 pt-2">
       <div>
         <div className="flex flex-col md:flex-row gap-4">
           {/* Chose seat */}
           <div className="md:w-2/3">
-            <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-              <h3 className="text-center mt-1 text-lg">Màn hình</h3>
-              <div className="screen justify-center mb-8"></div>
+            <div className="bg-white shadow-md mb-4">
+              <h3 className="text-center text-lg">Màn hình</h3>
+              <div className="screen justify-center mb-5"></div>
               {renderSeats()}
               <div className="flex justify-between">
                 <div className="flex items-center">
@@ -108,46 +110,46 @@ export default function Checkout() {
 
           {/* Booking info */}
           <div className="md:w-1/3">
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white shadow-md p-6">
               <h2 className="text-2xl text-center font-semibold mb-6">
                 Thông tin đặt vé
               </h2>
-              <div className="flex justify-between my-4">
+              <div className="flex justify-between my-4 text-lg">
                 <span>Cụm Rạp:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.tenCumRap}
                 </span>
               </div>
               <hr />
-              <div className="flex justify-between my-4">
+              <div className="flex justify-between my-4 text-lg">
                 <span>Địa chỉ:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.diaChi}
                 </span>
               </div>
               <hr />
-              <div className="flex justify-between my-4">
+              <div className="flex justify-between my-4 text-lg">
                 <span>Rạp:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.tenRap}
                 </span>
               </div>
               <hr />
-              <div className="flex justify-between my-4">
+              <div className="flex justify-between my-4 text-lg">
                 <span>Ngày giờ chiếu:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.ngayChieu} - {data?.thongTinPhim.gioChieu}
                 </span>
               </div>
               <hr />
-              <div className="flex justify-between my-4">
+              <div className="flex justify-between my-4 text-lg">
                 <span>Tên Phim:</span>
                 <span className="text-green-600 font-semibold">
                   {data?.thongTinPhim.tenPhim}
                 </span>
               </div>
               <hr />
-              <div className="flex justify-between my-4">
+              <div className="flex justify-between my-4 text-lg">
                 <span>Ghế:</span>
                 <span className="text-green-600 font-semibold">
                   {selectedSeats
@@ -194,4 +196,82 @@ export default function Checkout() {
       </div>
     </div>
   );
+}
+
+function BookingHistory() {
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.UserInfoReducer.data);
+
+  useEffect(() => {
+    dispatch(actGetUserInfo());
+  }, []);
+
+  const renderTicket = () => {
+    return userInfo?.thongTinDatVe.map((ticket) => {
+      return (
+        <div className="p-4 lg:w-1/2" key={ticket.maVe}>
+          <div className="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+            <img
+              alt="team"
+              className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
+              src={ticket.hinhAnh}
+            />
+            <div className="flex-grow sm:pl-8">
+              <h2 className="title-font font-medium text-red-600 text-xl">
+                {ticket.tenPhim}
+              </h2>
+              <h3 className="text-orange-600 mt-3 text-lg">
+                Ngày giờ chiếu:
+                {moment(ticket.ngayDat).format(" DD/MM/YYYY - hh:mm A")}
+              </h3>
+              <p className="mt-3 text-lg">
+                Cụm rạp: {ticket.danhSachGhe[0].tenHeThongRap}
+              </p>
+              <p className="mt-3 text-lg">
+                Tên rạp: {ticket.danhSachGhe[0].tenCumRap}
+              </p>
+              <p className="mt-3 text-lg">
+                Ghế:{" "}
+                {ticket.danhSachGhe.slice(0, 5).map((ghe, index, arr) => (
+                  <span key={index}>
+                    {ghe.tenGhe}
+                    {index < arr.length - 1 ? ", " : ""}
+                  </span>
+                ))}
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
+
+  return (
+    <section className="text-gray-600 body-font">
+      <div className="container px-5 py-5 mx-auto">
+        <div className="flex flex-col text-center w-full mb-20">
+          <h1 className="text-3xl font-medium title-font mb-4 text-red-600">
+            LỊCH SỬ ĐẶT VÉ
+          </h1>
+        </div>
+        <div className="flex flex-wrap -m-4">{renderTicket()}</div>
+      </div>
+    </section>
+  );
+}
+
+export default function () {
+  const items = [
+    {
+      key: "1",
+      label: "01. CHỌN GHẾ VÀ THANH TOÁN",
+      children: <Checkout />,
+    },
+    {
+      key: "2",
+      label: "02. LỊCH SỬ ĐẶT VÉ",
+      children: <BookingHistory />,
+    },
+  ];
+  return <Tabs defaultActiveKey="1" items={items} className="ml-3" />;
 }
