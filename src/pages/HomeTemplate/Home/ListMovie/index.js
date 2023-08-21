@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actListMovie } from "../../../../redux/actions/ListMovieAction";
 import MovieItem from "./MovieItem";
+import Loader from "../../../../components/Loader";
 
 export default function ListMovie() {
   const { data, loading } = useSelector((state) => state.ListMovieReducer);
@@ -14,7 +15,7 @@ export default function ListMovie() {
   }, []);
 
   const renderListMovie = () => {
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Loader />;
 
     const movieToShow = data?.filter(
       (movie) =>

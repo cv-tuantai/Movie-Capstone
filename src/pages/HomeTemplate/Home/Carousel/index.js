@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Carousel } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { actGetCarousel } from "../../../../redux/actions/CarouselAction";
+import Loader from "../../../../components/Loader";
 
 export default function HomeCarousel() {
   const { data, loading } = useSelector((state) => state.CarouselReducer);
@@ -18,7 +19,7 @@ export default function HomeCarousel() {
   };
 
   const renderCarousel = () => {
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Loader />;
     return data?.map((item) => {
       return (
         <div key={item.maBanner}>

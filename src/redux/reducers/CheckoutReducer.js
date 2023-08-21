@@ -43,6 +43,10 @@ const CheckoutReducer = (state = initalState, action) => {
       state.selectedSeats = selectedSeatsClone;
       return { ...state };
 
+    case ActionTypes.COMPLETE_CHECKOUT:
+      state.selectedSeats = [];
+      return { ...state };
+
     default:
       return { ...state };
   }

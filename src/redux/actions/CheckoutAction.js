@@ -43,3 +43,9 @@ export const actSelectedSeats = (data) => {
     payload: data,
   };
 };
+
+export const actCompleteCheckout = () => {
+  return {
+    type: ActionTypes.COMPLETE_CHECKOUT,
+  };
+};

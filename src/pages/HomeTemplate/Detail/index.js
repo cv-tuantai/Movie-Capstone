@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { actDetailMovie } from "../../../redux/actions/DetailMovieAction";
 import moment from "moment";
 import { Rate, Tabs } from "antd";
+import Loader from "../../../components/Loader";
 
 export default function Detail() {
   const dispatch = useDispatch();
@@ -75,7 +76,7 @@ export default function Detail() {
     );
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
   if (data) {
     return (
       <>

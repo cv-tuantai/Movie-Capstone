@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { actGetTheater } from "../../../../redux/actions/TheaterAction";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import Loader from "../../../../components/Loader";
 
 const Menu = () => {
   const { data, loading } = useSelector((state) => state.TheaterReducer);
@@ -13,7 +14,7 @@ const Menu = () => {
     dispatch(actGetTheater());
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
 
   const renderListTheater = () => {
     return (

@@ -3,6 +3,7 @@ import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   actCheckout,
+  actCompleteCheckout,
   actSelectedSeats,
 } from "../../../redux/actions/CheckoutAction";
 import { actBookingInfo } from "../../../redux/actions/BookingInfoAction";
@@ -11,6 +12,8 @@ import { CheckOutlined, CloseOutlined, UserOutlined } from "@ant-design/icons";
 import { Tabs } from "antd";
 import { actGetUserInfo } from "../../../redux/actions/UserInfoAction";
 import moment from "moment";
+import _ from "lodash";
+import Loader from "../../../components/Loader";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -23,7 +26,7 @@ function Checkout() {
     dispatch(actCheckout(id));
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
 
   const renderSeats = () => {
     return data?.danhSachGhe.map((ghe) => {
@@ -185,6 +188,8 @@ function Checkout() {
                     danhSachVe: selectedSeats,
                   };
                   dispatch(actBookingInfo(bookingInfo));
+                  dispatch(actCheckout(id));
+                  dispatch(actCompleteCheckout());
                 }}
                 className="bg-red-700 hover:bg-red-500 duration-300 text-white text-2xl py-2 px-4 rounded-lg mt-4 w-full"
               >
@@ -200,14 +205,16 @@ function Checkout() {
 
 function BookingHistory() {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.UserInfoReducer.data);
+  const { data, loading } = useSelector((state) => state.UserInfoReducer);
 
   useEffect(() => {
     dispatch(actGetUserInfo());
   }, []);
 
+  if (loading) return <Loader />;
+
   const renderTicket = () => {
-    return userInfo?.thongTinDatVe.map((ticket) => {
+    return data?.thongTinDatVe.map((ticket) => {
       return (
         <div className="p-4 lg:w-1/2" key={ticket.maVe}>
           <div className="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
@@ -232,12 +239,14 @@ function BookingHistory() {
               </p>
               <p className="mt-3 text-lg">
                 Ghế:{" "}
-                {ticket.danhSachGhe.slice(0, 5).map((ghe, index, arr) => (
-                  <span key={index}>
-                    {ghe.tenGhe}
-                    {index < arr.length - 1 ? ", " : ""}
-                  </span>
-                ))}
+                {_.sortBy(ticket.danhSachGhe.slice(0, 8), ["tenGhe"]).map(
+                  (ghe, index, arr) => (
+                    <span key={index}>
+                      {ghe.tenGhe}
+                      {index < arr.length - 1 ? ", " : ""}
+                    </span>
+                  ),
+                )}
               </p>
             </div>
           </div>
