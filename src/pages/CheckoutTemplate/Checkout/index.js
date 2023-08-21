@@ -7,9 +7,9 @@ import {
   actSelectedSeats,
 } from "../../../redux/actions/CheckoutAction";
 import { actBookingInfo } from "../../../redux/actions/BookingInfoAction";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CheckOutlined, CloseOutlined, UserOutlined } from "@ant-design/icons";
-import { Tabs } from "antd";
+import { Tabs, Button } from "antd";
 import { actGetUserInfo } from "../../../redux/actions/UserInfoAction";
 import moment from "moment";
 import _ from "lodash";
@@ -181,20 +181,31 @@ function Checkout() {
                   VNĐ
                 </span>
               </div>
-              <button
-                onClick={() => {
-                  const bookingInfo = {
-                    maLichChieu: id,
-                    danhSachVe: selectedSeats,
-                  };
-                  dispatch(actBookingInfo(bookingInfo));
-                  dispatch(actCheckout(id));
-                  dispatch(actCompleteCheckout());
-                }}
-                className="bg-red-700 hover:bg-red-500 duration-300 text-white text-2xl py-2 px-4 rounded-lg mt-4 w-full"
-              >
-                Thanh toán
-              </button>
+              <div className="flex justify-center">
+                <button
+                  onClick={() => {
+                    const bookingInfo = {
+                      maLichChieu: id,
+                      danhSachVe: selectedSeats,
+                    };
+                    dispatch(actBookingInfo(bookingInfo));
+                    dispatch(actCheckout(id));
+                    dispatch(actCompleteCheckout());
+                  }}
+                  className=" bg-green-600 hover:bg-green-500 duration-300 text-white text-2xl py-2 px-4 rounded-lg mt-4 w-3/5"
+                >
+                  Thanh toán
+                </button>
+                <button
+                  onClick={() => {
+                    window.history.back();
+                    dispatch(actCompleteCheckout());
+                  }}
+                  className="bg-red-700 hover:bg-red-500 duration-300 text-white text-2xl py-2 px-4 rounded-lg mt-4 w-1/5 ml-3"
+                >
+                  Hủy
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -270,6 +281,17 @@ function BookingHistory() {
 }
 
 export default function () {
+  const navigate = useNavigate();
+  const operations = (
+    <Button
+      onClick={() => {
+        navigate("/", { replace: true });
+      }}
+      className="mr-3"
+    >
+      Quay lại trang chủ
+    </Button>
+  );
   const items = [
     {
       key: "1",
@@ -282,5 +304,12 @@ export default function () {
       children: <BookingHistory />,
     },
   ];
-  return <Tabs defaultActiveKey="1" items={items} className="ml-3" />;
+  return (
+    <Tabs
+      defaultActiveKey="1"
+      tabBarExtraContent={operations}
+      items={items}
+      className="ml-3"
+    />
+  );
 }

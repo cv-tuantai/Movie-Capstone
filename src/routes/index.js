@@ -33,6 +33,10 @@ const routes = [
     element: lazy(() => import("../pages/UserTemplate")),
   },
   {
+    path: "profile",
+    element: lazy(() => import("../pages/UserTemplate/Profile")),
+  },
+  {
     path: "checkout/:id",
     element: lazy(() => import("../pages/CheckoutTemplate")),
   },

@@ -71,7 +71,7 @@ const actLoginRequest = () => {
   };
 };
 
-const actLoginSuccess = (data) => {
+export const actLoginSuccess = (data) => {
   return {
     type: ActionTypes.LOGIN_SUCCESS,
     payload: data,
