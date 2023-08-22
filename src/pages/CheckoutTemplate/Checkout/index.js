@@ -8,7 +8,12 @@ import {
 } from "../../../redux/actions/CheckoutAction";
 import { actBookingInfo } from "../../../redux/actions/BookingInfoAction";
 import { useNavigate, useParams } from "react-router-dom";
-import { CheckOutlined, CloseOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  CheckOutlined,
+  CloseOutlined,
+  HomeOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { Tabs, Button } from "antd";
 import { actGetUserInfo } from "../../../redux/actions/UserInfoAction";
 import moment from "moment";
@@ -280,6 +285,7 @@ function BookingHistory() {
   );
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function () {
   const navigate = useNavigate();
   const operations = (
@@ -287,7 +293,7 @@ export default function () {
       onClick={() => {
         navigate("/", { replace: true });
       }}
-      className="mr-3"
+      className="mr-3 text-red-600 font-semibold"
     >
       Quay lại trang chủ
     </Button>

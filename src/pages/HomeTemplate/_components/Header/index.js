@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { actLogout } from "../../../../redux/actions/LoginAction";
@@ -8,114 +8,147 @@ export default function Header() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.LoginReducer.data);
 
-  const renderLogin = () => {
-    if (user) {
-      return (
-        <div className="items-center flex-shrink-0 hidden lg:flex">
-          <Link to="/profile">
-            <button className="self-center px-8 py-3 rounded">{`Hello ${user.taiKhoan}!`}</button>
-          </Link>
+  const [isShow, setShow] = useState(false);
 
+  const cssActive =
+    "block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white";
+  const cssUnactive =
+    "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700";
+
+  const renderLogin = () => {
+    if (!user) {
+      return (
+        <>
+          <Link
+            to="/login"
+            className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+          >
+            Đăng nhập
+          </Link>
+          <Link
+            to="/register"
+            className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+          >
+            Đăng ký
+          </Link>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Link
+            to="/profile"
+            className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+          >
+            {`Xin chào ${user.taiKhoan}`}
+          </Link>
           <button
             onClick={() => {
               dispatch(actLogout(navigate));
             }}
-            className="self-center px-8 py-3 font-semibold rounded"
+            className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
           >
             Đăng xuất
           </button>
-        </div>
+        </>
       );
     }
-
-    return (
-      <div className="items-center flex-shrink-0 hidden lg:flex">
-        <Link to="/login">
-          <button className="self-center px-8 py-3 rounded">Đăng nhập</button>
-        </Link>
-        <Link to="/register">
-          <button className="self-center px-8 py-3 font-semibold rounded">
-            Đăng ký
-          </button>
-        </Link>
-      </div>
-    );
   };
 
   return (
-    <header className="p-3 bg-gray-800 bg-opacity-70 text-white fixed w-full z-10">
-      <div className="container flex justify-between h-10 lg:px-16 px-6 mx-auto">
-        <Link
-          rel="noopener noreferrer"
-          to="/"
-          aria-label="Back to homepage"
-          className="flex items-center p-2"
-        >
-          <img
-            src="https://cybersoft.edu.vn/wp-content/uploads/2022/10/cyberlogo-white.png"
-            alt=""
-            className="w-3/5"
-          />
-        </Link>
-        <ul className="items-stretch hidden space-x-3 lg:flex">
-          <li className="flex">
-            <NavLink
-              rel="noopener noreferrer"
-              to=""
-              className={({ isActive }) =>
-                isActive
-                  ? "flex items-center px-4 -mb-1 border-b-2"
-                  : "flex items-center px-4 -mb-1"
-              }
-            >
-              Trang chủ
-            </NavLink>
-          </li>
-          <li className="flex">
-            <NavLink
-              rel="noopener noreferrer"
-              to="/contact"
-              className={({ isActive }) =>
-                isActive
-                  ? "flex items-center px-4 -mb-1 border-b-2"
-                  : "flex items-center px-4 -mb-1"
-              }
-            >
-              Liên hệ
-            </NavLink>
-          </li>
-          <li className="flex">
-            <NavLink
-              rel="noopener noreferrer"
-              to="/news"
-              className={({ isActive }) =>
-                isActive
-                  ? "flex items-center px-4 -mb-1 border-b-2"
-                  : "flex items-center px-4 -mb-1"
-              }
-            >
-              Tin tức
-            </NavLink>
-          </li>
-        </ul>
-        {renderLogin()}
-        <button className="p-4 lg:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-6 h-6 dark:text-gray-100"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
+    <header className="dark">
+      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 dark:bg-opacity-70 fixed z-10 w-full">
+        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+          <Link to="/" className="flex items-center">
+            <img
+              src="https://i.imgur.com/lC22izJ.png"
+              className="mr-3 h-6 sm:h-9"
+              alt="Cybersoft Logo"
             />
-          </svg>
-        </button>
-      </div>
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+              Cybersoft
+            </span>
+          </Link>
+          <div className="flex items-center lg:order-2">
+            {renderLogin()}
+            <button
+              onClick={() => {
+                setShow(!isShow);
+              }}
+              data-collapse-toggle="mobile-menu-2"
+              type="button"
+              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="mobile-menu-2"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <svg
+                className="hidden w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            className={`${
+              isShow ? "hidden" : ""
+            } justify-between items-center w-full lg:flex lg:w-auto lg:order-1`}
+            id="mobile-menu-2"
+          >
+            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? cssActive : cssUnactive
+                  }
+                >
+                  Trang chủ
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/news"
+                  className={({ isActive }) =>
+                    isActive ? cssActive : cssUnactive
+                  }
+                >
+                  Tin tức
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    isActive ? cssActive : cssUnactive
+                  }
+                >
+                  Liên hệ
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
   );
 }

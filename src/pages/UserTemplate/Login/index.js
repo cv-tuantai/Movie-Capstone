@@ -141,6 +141,15 @@ export default function Login() {
                 Đăng ký
               </Link>
             </div>
+            <div className="mt-3 text-sm font-display font-semibold text-gray-700 text-center">
+              Quay lại{" "}
+              <Link
+                to="/"
+                className="cursor-pointer text-indigo-600 hover:text-indigo-800"
+              >
+                Trang chủ
+              </Link>
+            </div>
           </div>
         </div>
       </div>
