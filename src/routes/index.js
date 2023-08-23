@@ -40,6 +40,16 @@ const routes = [
     path: "checkout/:id",
     element: lazy(() => import("../pages/CheckoutTemplate")),
   },
+  {
+    path: "admin",
+    element: lazy(() => import("../pages/AdminTemplate")),
+    nested: [
+      {
+        path: "films",
+        element: lazy(() => import("../pages/AdminTemplate/Films")),
+      },
+    ],
+  },
 ];
 
 const renderRoutes = () => {

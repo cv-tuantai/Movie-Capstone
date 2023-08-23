@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import Header from "./_components/Header";
-import Footer from "./_components/Footer";
-import { Outlet, useNavigate } from "react-router-dom";
+import Dashboard from "./Dashboard";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { actTryLogout } from "../../redux/actions/LoginAction";
 
-export default function HomeTemplate() {
+export default function AdminTemplate() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,9 +14,7 @@ export default function HomeTemplate() {
 
   return (
     <div>
-      <Header />
-      <Outlet />
-      <Footer />
+      <Dashboard />
     </div>
   );
 }

@@ -20,7 +20,7 @@ export const actLogin = (data, navigate) => {
           const time = new Date().getTime();
           const expire = time + TIME_EXPIRE;
           localStorage.setItem("expire", expire);
-          dispatch(actTimeoutLogout(navigate, expire));
+          dispatch(actTimeoutLogout(navigate, TIME_EXPIRE));
 
           // quay lại trang trước đó
           window.history.back();
@@ -60,7 +60,7 @@ export const actTryLogout = (navigate) => {
       dispatch(actLogout(navigate));
       return;
     }
-    dispatch(actTimeoutLogout(navigate, time - expire));
+    dispatch(actTimeoutLogout(navigate, expire - time));
     dispatch(actLoginSuccess(user));
   };
 };
