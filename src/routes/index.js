@@ -45,7 +45,7 @@ const routes = [
     element: lazy(() => import("../pages/AdminTemplate")),
     nested: [
       {
-        path: "films",
+        path: "",
         element: lazy(() => import("../pages/AdminTemplate/Films")),
       },
     ],

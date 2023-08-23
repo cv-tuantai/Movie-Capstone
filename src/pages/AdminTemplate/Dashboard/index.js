@@ -17,7 +17,7 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem(<Link to="/admin/films">Film</Link>, "1", <PlayCircleOutlined />),
+  getItem(<Link to="/admin">Film</Link>, "1", <PlayCircleOutlined />),
   getItem("Files", "9", <FileOutlined />),
 ];
 const Dashboard = () => {

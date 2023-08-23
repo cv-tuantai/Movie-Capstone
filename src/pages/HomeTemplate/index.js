@@ -9,6 +9,7 @@ export default function HomeTemplate() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //logout sau khi hết expire dù refresh trang
   useEffect(() => {
     dispatch(actTryLogout(navigate));
   }, []);

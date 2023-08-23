@@ -7,6 +7,7 @@ export default function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //logout sau khi hết expire dù refresh trang
   useEffect(() => {
     dispatch(actTryLogout(navigate));
   }, []);
