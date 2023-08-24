@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { FileOutlined, PlayCircleOutlined } from "@ant-design/icons";
+import { PlayCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { actLogout } from "../../../redux/actions/LoginAction";
@@ -17,8 +17,12 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem(<Link to="/admin">Film</Link>, "1", <PlayCircleOutlined />),
-  getItem("Files", "9", <FileOutlined />),
+  getItem(<Link to="/admin">Quản lý phim</Link>, "1", <PlayCircleOutlined />),
+  getItem(
+    <Link to="/admin/add-film">Thêm phim</Link>,
+    "2",
+    <PlusCircleOutlined />,
+  ),
 ];
 const Dashboard = () => {
   const [collapsed, setCollapsed] = useState(false);

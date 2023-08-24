@@ -6,8 +6,6 @@ import Loader from "../../../components/Loader";
 import { Link } from "react-router-dom";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
-const { Search } = Input;
-
 export default function Films() {
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.ListMovieReducer);
@@ -18,6 +16,7 @@ export default function Films() {
 
   if (loading) return <Loader />;
 
+  const { Search } = Input;
   const columns = [
     {
       title: "Mã phim",
@@ -30,9 +29,7 @@ export default function Films() {
       title: "Hình ảnh",
       dataIndex: "hinhAnh",
       render: (text, film) => (
-        <>
-          <img src={film.hinhAnh} alt={film.maPhim} width={200} />
-        </>
+        <img src={film.hinhAnh} alt={film.maPhim} width={200} />
       ),
       width: "30%",
     },
@@ -69,9 +66,11 @@ export default function Films() {
   return (
     <div>
       <h2 className="text-2xl font-semibold text-center">Quản lý phim</h2>
-      <Button type="primary" danger className="my-3">
-        Thêm phim
-      </Button>
+      <Link to="/admin/add-film">
+        <Button type="primary" danger className="my-3">
+          Thêm phim
+        </Button>
+      </Link>
       <Search
         placeholder="input search text"
         allowClear
