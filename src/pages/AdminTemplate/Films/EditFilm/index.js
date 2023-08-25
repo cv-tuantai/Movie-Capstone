@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { actUpdateFilm } from "../../../../redux/actions/UpdateFilmAction";
+import moment from "moment";
 dayjs.extend(customParseFormat);
 
 const EditFilm = () => {
@@ -31,7 +32,7 @@ const EditFilm = () => {
       sapChieu: data?.sapChieu,
       hot: data?.hot,
       danhGia: data?.danhGia,
-      maNhom: data?.maNhom,
+      maNhom: "GP09",
       hinhAnh: null,
     },
     onSubmit: (values) => {
@@ -63,16 +64,16 @@ const EditFilm = () => {
     };
   };
 
-  const handleChangeFile = (e) => {
+  const handleChangeFile = async (e) => {
     const file = e.target.files[0];
+
+    await formik.setFieldValue("hinhAnh", file);
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (e) => {
       setImgSrc(e.target.result);
     };
-
-    formik.setFieldValue("hinhAnh", file);
   };
 
   return (

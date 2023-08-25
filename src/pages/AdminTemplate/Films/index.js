@@ -5,6 +5,7 @@ import { actListMovie } from "../../../redux/actions/ListMovieAction";
 import Loader from "../../../components/Loader";
 import { Link } from "react-router-dom";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { actDeleteFilm } from "../../../redux/actions/DeleteFilmAction";
 
 export default function Films() {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ export default function Films() {
     },
     {
       title: "Hành động",
-      dataIndex: "hanhDong",
+      dataIndex: "maPhim",
       render: (text, film) => {
         return (
           <>
@@ -51,9 +52,20 @@ export default function Films() {
             >
               <EditOutlined style={{ color: "blue" }} />{" "}
             </Link>
-            <Link key={2} className="text-2xl" to="/">
+            <span
+              key={2}
+              style={{ cursor: "pointer" }}
+              className="text-2xl"
+              onClick={() => {
+                if (
+                  window.confirm("Bạn có chắc là muốn xóa phim " + film.tenPhim)
+                ) {
+                  dispatch(actDeleteFilm(film.maPhim));
+                }
+              }}
+            >
               <DeleteOutlined style={{ color: "red" }} />{" "}
-            </Link>
+            </span>
           </>
         );
       },
@@ -84,7 +96,12 @@ export default function Films() {
           marginBottom: "20px",
         }}
       />
-      <Table columns={columns} dataSource={data} onChange={onChange} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        onChange={onChange}
+        rowKey={"maPhim"}
+      />
     </div>
   );
 }

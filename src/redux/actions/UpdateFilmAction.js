@@ -14,7 +14,9 @@ export const actUpdateFilm = (formData) => {
           alert("Cập nhật phim thành công!");
         }
       })
-      .catch((error) => dispatch(actUpdateFilmFail(error)));
+      .catch((error) => {
+        dispatch(actUpdateFilmFail(error));
+      });
   };
 };
 
