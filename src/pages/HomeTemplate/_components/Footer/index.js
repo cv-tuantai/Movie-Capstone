@@ -49,7 +49,7 @@ export default function Footer() {
       <div className="bg-gray-200">
         <div className="container py-2 mx-auto flex sm:flex-row flex-col">
           <p className="text-sm hover:text-red-500 sm:mt-0 mt-4">
-            © 2020 All rights reserved
+            Cybersoft © 2020 All rights reserved
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
             <a className="hover:text-red-500">

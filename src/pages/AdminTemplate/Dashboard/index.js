@@ -18,11 +18,7 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem(<Link to="/admin">Quản lý phim</Link>, "1", <PlayCircleOutlined />),
-  getItem(
-    <Link to="/admin/add-film">Thêm phim</Link>,
-    "2",
-    <PlusCircleOutlined />,
-  ),
+  getItem(<Link to="/">Quản lý user</Link>, "2", <PlusCircleOutlined />),
 ];
 const Dashboard = () => {
   const [collapsed, setCollapsed] = useState(false);

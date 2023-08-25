@@ -77,7 +77,7 @@ export default function Films() {
     console.log("params", pagination, filters, sorter, extra);
   };
 
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) => dispatch(actListMovie(value));
 
   return (
     <div>
@@ -88,7 +88,7 @@ export default function Films() {
         </Button>
       </Link>
       <Search
-        placeholder="input search text"
+        placeholder="Nhập tên phim để tìm kiếm"
         allowClear
         onSearch={onSearch}
         style={{

@@ -1,12 +1,16 @@
 import * as ActionTypes from "../constants/ListMovieConstant";
 import api from "../../util/api";
 
-export const actListMovie = () => {
+export const actListMovie = (tenPhim = "") => {
   return (dispatch) => {
     dispatch(actListMovieRequest());
 
+    const url = tenPhim
+      ? `QuanLyPhim/LayDanhSachPhim?maNhom=GP09&tenphim=${tenPhim}`
+      : "QuanLyPhim/LayDanhSachPhim?maNhom=GP09";
+
     api
-      .get("QuanLyPhim/LayDanhSachPhim?maNhom=GP09")
+      .get(url)
       .then((result) => {
         console.log(result);
         if (result.data.statusCode === 200) {
