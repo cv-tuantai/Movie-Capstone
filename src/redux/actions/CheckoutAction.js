@@ -8,7 +8,6 @@ export const actCheckout = (maLichChieu) => {
     api
       .get(`QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`)
       .then((result) => {
-        console.log(result);
         if (result.data.statusCode === 200) {
           dispatch(actCheckoutSuccess(result.data.content));
         }

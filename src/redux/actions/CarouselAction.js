@@ -8,7 +8,6 @@ export const actGetCarousel = () => {
     api
       .get("QuanLyPhim/LayDanhSachBanner")
       .then((result) => {
-        console.log(result);
         if (result.data.statusCode === 200) {
           dispatch(actGetCarouselSuccess(result.data.content));
         }

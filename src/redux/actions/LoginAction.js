@@ -11,8 +11,6 @@ export const actLogin = (data, navigate) => {
       .post("QuanLyNguoiDung/DangNhap", data)
       .then((result) => {
         if (result.data.statusCode === 200) {
-          console.log(result);
-
           const user = result.data.content;
           dispatch(actLoginSuccess(user));
           localStorage.setItem("user", JSON.stringify(user));
@@ -22,12 +20,11 @@ export const actLogin = (data, navigate) => {
           localStorage.setItem("expire", expire);
           dispatch(actTimeoutLogout(navigate, TIME_EXPIRE));
 
-          // quay lại trang trước đó
-          window.history.back();
+          // quay lại trang chủ
+          navigate("/login", { replace: true });
         }
       })
       .catch((error) => {
-        console.log(error);
         dispatch(actLoginFail(error));
       });
   };

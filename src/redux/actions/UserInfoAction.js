@@ -8,11 +8,11 @@ export const actGetUserInfo = () => {
     api
       .post("QuanLyNguoiDung/ThongTinTaiKhoan")
       .then((result) => {
-        console.log(result);
-        dispatch(actGetUserInfoSuccess(result.data.content));
+        if (result.data.statusCode === 200) {
+          dispatch(actGetUserInfoSuccess(result.data.content));
+        }
       })
       .catch((error) => {
-        console.log(error);
         dispatch(actGetUserInfoFail(error));
       });
   };

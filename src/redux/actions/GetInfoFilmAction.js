@@ -8,7 +8,6 @@ export const actGetInfoFilm = (maPhim) => {
     api
       .get(`QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`)
       .then((result) => {
-        console.log(result);
         if (result.data.statusCode === 200) {
           dispatch(actGetInfoFilmSuccess(result.data.content));
         }

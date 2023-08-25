@@ -9,7 +9,6 @@ export const actDeleteFilm = (maPhim) => {
     api
       .delete(`QuanLyPhim/XoaPhim?MaPhim=${maPhim}`)
       .then((result) => {
-        console.log(result);
         if (result.data.statusCode === 200) {
           dispatch(actDeleteFilmSuccess(result.data.content));
           alert("Xóa phim thành công!");

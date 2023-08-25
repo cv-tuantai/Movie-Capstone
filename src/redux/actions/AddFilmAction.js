@@ -8,7 +8,6 @@ export const actAddFilm = (formData) => {
     api
       .post("QuanLyPhim/ThemPhimUploadHinh", formData)
       .then((result) => {
-        console.log(result);
         if (result.data.statusCode === 200) {
           dispatch(actAddFilmSuccess(result.data.content));
           alert("Thêm phim thành công");

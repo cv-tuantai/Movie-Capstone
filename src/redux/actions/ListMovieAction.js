@@ -12,7 +12,6 @@ export const actListMovie = (tenPhim = "") => {
     api
       .get(url)
       .then((result) => {
-        console.log(result);
         if (result.data.statusCode === 200) {
           dispatch(actListMovieSuccess(result.data.content));
         }

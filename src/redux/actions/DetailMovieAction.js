@@ -8,7 +8,6 @@ export const actDetailMovie = (id) => {
     api
       .get(`QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`)
       .then((result) => {
-        console.log(result);
         if (result.data.statusCode === 200) {
           dispatch(actDetailMovieSuccess(result.data.content));
         }

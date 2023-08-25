@@ -8,11 +8,11 @@ export const actBookingInfo = (bookingInfo) => {
     api
       .post("QuanLyDatVe/DatVe", bookingInfo)
       .then((result) => {
-        console.log(result);
-        dispatch(actBookingInfoSuccess(bookingInfo));
+        if (result.data.statusCode === 200) {
+          dispatch(actBookingInfoSuccess(result.data.content));
+        }
       })
       .catch((error) => {
-        console.log(error);
         dispatch(actBookingInfoFail(error));
       });
   };
