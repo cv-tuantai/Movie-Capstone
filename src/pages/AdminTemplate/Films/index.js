@@ -44,7 +44,11 @@ export default function Films() {
       render: (text, film) => {
         return (
           <>
-            <Link key={1} className=" mr-2 text-2xl" to="/">
+            <Link
+              to={`/admin/edit-film/${film.maPhim}`}
+              key={1}
+              className=" mr-2 text-2xl"
+            >
               <EditOutlined style={{ color: "blue" }} />{" "}
             </Link>
             <Link key={2} className="text-2xl" to="/">

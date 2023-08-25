@@ -1,28 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DatePicker, Form, Input, InputNumber, Switch } from "antd";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
-import { actAddFilm } from "../../../../redux/actions/AddFilmAction";
+import { useDispatch, useSelector } from "react-redux";
+import { actGetInfoFilm } from "../../../../redux/actions/GetInfoFilmAction";
+import { useParams } from "react-router-dom";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import { actUpdateFilm } from "../../../../redux/actions/UpdateFilmAction";
+dayjs.extend(customParseFormat);
 
-const AddFilm = () => {
+const EditFilm = () => {
   const dispatch = useDispatch();
   const [imgSrc, setImgSrc] = useState("");
+  const { id } = useParams();
+  const { data } = useSelector((state) => state.GetInfoFilmReducer);
+
+  useEffect(() => {
+    dispatch(actGetInfoFilm(id));
+  }, []);
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      tenPhim: "",
-      trailer: "",
-      moTa: "",
-      ngayKhoiChieu: "",
-      dangChieu: false,
-      sapChieu: false,
-      hot: false,
-      danhGia: 0,
-      hinhAnh: {},
+      maPhim: data?.maPhim,
+      tenPhim: data?.tenPhim,
+      trailer: data?.trailer,
+      moTa: data?.moTa,
+      ngayKhoiChieu: data?.ngayKhoiChieu,
+      dangChieu: data?.dangChieu,
+      sapChieu: data?.sapChieu,
+      hot: data?.hot,
+      danhGia: data?.danhGia,
+      maNhom: data?.maNhom,
+      hinhAnh: null,
     },
     onSubmit: (values) => {
-      values.maNhom = "GP09";
-
       //tạo đối tượng formData
       const formData = new FormData();
 
@@ -30,17 +42,18 @@ const AddFilm = () => {
         if (key !== "hinhAnh") {
           formData.append(key, values[key]);
         } else {
-          formData.append("File", values.hinhAnh, values.hinhAnh.name);
+          if (values.hinhAnh !== null) {
+            formData.append("File", values.hinhAnh, values.hinhAnh.name);
+          }
         }
       }
-
-      // call api
-      dispatch(actAddFilm(formData));
+      //call api
+      dispatch(actUpdateFilm(formData));
     },
   });
 
   const handleChangeDatePicker = (value) => {
-    const ngayKhoiChieu = value.format("DD/MM/YYYY");
+    const ngayKhoiChieu = dayjs(value, "DD/MM/YYYY");
     formik.setFieldValue("ngayKhoiChieu", ngayKhoiChieu);
   };
 
@@ -64,7 +77,7 @@ const AddFilm = () => {
 
   return (
     <>
-      <h2 className="text-2xl font-semibold text-center mb-5">Thêm phim mới</h2>
+      <h2 className="text-2xl font-semibold text-center mb-5">Cập nhật phim</h2>
       <Form
         onSubmitCapture={formik.handleSubmit}
         labelCol={{
@@ -79,31 +92,57 @@ const AddFilm = () => {
         }}
       >
         <Form.Item label="Tên phim">
-          <Input name="tenPhim" onChange={formik.handleChange} />
+          <Input
+            name="tenPhim"
+            onChange={formik.handleChange}
+            value={formik.values.tenPhim}
+          />
         </Form.Item>
         <Form.Item label="Trailer">
-          <Input name="trailer" onChange={formik.handleChange} />
+          <Input
+            name="trailer"
+            onChange={formik.handleChange}
+            value={formik.values.trailer}
+          />
         </Form.Item>
         <Form.Item label="Mô tả">
-          <Input name="moTa" onChange={formik.handleChange} />
+          <Input
+            name="moTa"
+            onChange={formik.handleChange}
+            value={formik.values.moTa}
+          />
         </Form.Item>
         <Form.Item label="Ngày khởi chiếu">
-          <DatePicker format="DD/MM/YYYY" onChange={handleChangeDatePicker} />
+          <DatePicker
+            format="DD/MM/YYYY"
+            onChange={handleChangeDatePicker}
+            value={dayjs(formik.values.ngayKhoiChieu)}
+          />
         </Form.Item>
         <Form.Item label="Đang chiếu" valuePropName="checked">
-          <Switch onChange={handleChangeSwitch("dangChieu")} />
+          <Switch
+            onChange={handleChangeSwitch("dangChieu")}
+            checked={formik.values.dangChieu}
+          />
         </Form.Item>
         <Form.Item label="Sắp chiếu" valuePropName="checked">
-          <Switch onChange={handleChangeSwitch("sapChieu")} />
+          <Switch
+            onChange={handleChangeSwitch("sapChieu")}
+            checked={formik.values.sapChieu}
+          />
         </Form.Item>
         <Form.Item label="Hot" valuePropName="checked">
-          <Switch onChange={handleChangeSwitch("hot")} />
+          <Switch
+            onChange={handleChangeSwitch("hot")}
+            checked={formik.values.hot}
+          />
         </Form.Item>
         <Form.Item label="Đánh giá">
           <InputNumber
             onChange={handleChangeSwitch("danhGia")}
             min={1}
             max={10}
+            value={formik.values.danhGia}
           />
         </Form.Item>
         <Form.Item label="Hình ảnh">
@@ -115,7 +154,7 @@ const AddFilm = () => {
           <br />
           <img
             style={{ width: "150px", height: "150px", objectFit: "cover" }}
-            src={imgSrc}
+            src={imgSrc === "" ? data?.hinhAnh : imgSrc}
             alt="img"
           />
         </Form.Item>
@@ -124,11 +163,11 @@ const AddFilm = () => {
             type="submit"
             className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded"
           >
-            Thêm phim
+            Cập nhật
           </button>
         </Form.Item>
       </Form>
     </>
   );
 };
-export default AddFilm;
+export default EditFilm;
