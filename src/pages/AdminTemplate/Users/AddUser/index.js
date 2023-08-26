@@ -2,9 +2,11 @@ import React from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { actAddUser } from "../../../../redux/actions/AddUserAction";
+import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -17,7 +19,7 @@ const AddUser = () => {
       maNhom: "GP01",
     },
     onSubmit: (values) => {
-      dispatch(actAddUser(values));
+      dispatch(actAddUser(values, navigate));
     },
   });
 
