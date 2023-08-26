@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { actUpdateFilm } from "../../../../redux/actions/UpdateFilmAction";
-import moment from "moment";
 dayjs.extend(customParseFormat);
 
 const EditFilm = () => {

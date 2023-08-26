@@ -13,6 +13,10 @@ import GetInfoFilmReducer from "./reducers/GetInfoFilmReducer";
 import UpdateFilmReducer from "./reducers/UpdateFilmReducer";
 import DeleteFilmReducer from "./reducers/DeleteFilmReducer";
 import RegisterReducer from "./reducers/RegisterReducer";
+import GetListUsersReducer from "./reducers/GetListUsersReducer";
+import AddUserReducer from "./reducers/AddUserReducer";
+import GetUserInfoReducer from "./reducers/GetUserInfoReducer";
+import UpdateUserReducer from "./reducers/UpdateUserReducer";
 
 const rootReducer = combineReducers({
   CarouselReducer,
@@ -28,6 +32,10 @@ const rootReducer = combineReducers({
   UpdateFilmReducer,
   DeleteFilmReducer,
   RegisterReducer,
+  GetListUsersReducer,
+  AddUserReducer,
+  GetUserInfoReducer,
+  UpdateUserReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
