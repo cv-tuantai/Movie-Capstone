@@ -15,7 +15,7 @@ export default function Register() {
       email: "",
       soDt: "",
       hoTen: "",
-      maNhom: "GP09",
+      maNhom: "GP01",
     },
     onSubmit: (values) => {
       dispatch(actRegister(values, navigate));
