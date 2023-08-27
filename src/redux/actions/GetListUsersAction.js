@@ -1,12 +1,16 @@
 import * as ActionTypes from "../constants/GetListUsersConstant";
 import api from "../../util/api";
 
-export const actGetListUsers = () => {
+export const actGetListUsers = (taiKhoan = "") => {
   return (dispatch) => {
     dispatch(actGetListUsersRequest());
 
+    const url = taiKhoan
+      ? `QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01&tuKhoa=${taiKhoan}`
+      : "QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01";
+
     api
-      .get("QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01")
+      .get(url)
       .then((result) => {
         if (result.data.statusCode === 200) {
           dispatch(actGetListUsersSuccess(result.data.content));

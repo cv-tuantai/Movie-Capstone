@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { actListMovie } from "../../../redux/actions/ListMovieAction";
 import Loader from "../../../components/Loader";
 import { Link } from "react-router-dom";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import {
+  CalendarOutlined,
+  DeleteOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 import { actDeleteFilm } from "../../../redux/actions/DeleteFilmAction";
 
 export default function Films() {
@@ -37,7 +41,7 @@ export default function Films() {
     {
       title: "Tên phim",
       dataIndex: "tenPhim",
-      width: "40%",
+      width: "30%",
     },
     {
       title: "Hành động",
@@ -66,10 +70,17 @@ export default function Films() {
             >
               <DeleteOutlined style={{ color: "red" }} />{" "}
             </span>
+            <Link
+              to={`/admin/showtime/${film.maPhim}`}
+              key={3}
+              className=" ml-2 text-2xl"
+            >
+              <CalendarOutlined style={{ color: "green" }} />{" "}
+            </Link>
           </>
         );
       },
-      width: "10%",
+      width: "20%",
     },
   ];
 

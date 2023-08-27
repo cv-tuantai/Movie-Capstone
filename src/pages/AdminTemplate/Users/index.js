@@ -79,7 +79,7 @@ export default function Users() {
     console.log("params", pagination, filters, sorter, extra);
   };
 
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) => dispatch(actGetListUsers(value));
 
   return (
     <div>
