@@ -5,6 +5,7 @@ import { actGetUserInfo } from "../../../../redux/actions/GetUserInfoAction";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../../components/Loader";
 import { actUpdateUser } from "../../../../redux/actions/UpdateUserAction";
+import * as yup from "yup";
 
 const EditUser = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,20 @@ const EditUser = () => {
   useEffect(() => {
     dispatch(actGetUserInfo(id));
   }, []);
+
+  const updateUserSchema = yup.object().shape({
+    taiKhoan: yup.string().required("Tài khoản không bỏ trống!"),
+    matKhau: yup.string().required("Mật khẩu không bỏ trống!"),
+    email: yup
+      .string()
+      .required("Email không bỏ trống!")
+      .email("Email không đúng định dạng!"),
+    soDt: yup
+      .string()
+      .length(10, "Số điện thoại có mười chữ số!")
+      .required("Số điện thoại không bỏ trống!"),
+    hoTen: yup.string().required("Họ tên không bỏ trống!"),
+  });
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -27,6 +42,7 @@ const EditUser = () => {
       maLoaiNguoiDung: data?.maLoaiNguoiDung || "KhachHang",
       maNhom: data?.maNhom || "",
     },
+    validationSchema: updateUserSchema,
     onSubmit: (values) => {
       dispatch(actUpdateUser(values, navigate));
     },
@@ -51,9 +67,13 @@ const EditUser = () => {
                 placeholder="Họ tên người dùng"
                 name="hoTen"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.hoTen}
               />
             </div>
+            {formik.touched.hoTen && formik.errors.hoTen ? (
+              <div>{formik.errors.hoTen}</div>
+            ) : null}
           </div>
           <div className="w-1/2 px-3 mb-5">
             <label className="text-xs font-semibold px-1">Số điện thoại</label>
@@ -62,14 +82,18 @@ const EditUser = () => {
                 <i className="mdi mdi-account-outline text-gray-400 text-lg" />
               </div>
               <input
-                type="text"
+                type="number"
                 className="w-full -ml-10 px-5 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                 placeholder="SĐT"
                 name="soDt"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.soDt}
               />
             </div>
+            {formik.touched.soDt && formik.errors.soDt ? (
+              <div>{formik.errors.soDt}</div>
+            ) : null}
           </div>
         </div>
         <div className="flex -mx-3">
@@ -85,9 +109,13 @@ const EditUser = () => {
                 placeholder="johnsmith123"
                 name="taiKhoan"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.taiKhoan}
               />
             </div>
+            {formik.touched.taiKhoan && formik.errors.taiKhoan ? (
+              <div>{formik.errors.taiKhoan}</div>
+            ) : null}
           </div>
           <div className="w-1/2 px-3 mb-5">
             <label className="text-xs font-semibold px-1">Mật khẩu</label>
@@ -101,9 +129,13 @@ const EditUser = () => {
                 placeholder="************"
                 name="matKhau"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.matKhau}
               />
             </div>
+            {formik.touched.matKhau && formik.errors.matKhau ? (
+              <div>{formik.errors.matKhau}</div>
+            ) : null}
           </div>
         </div>
 
@@ -120,9 +152,13 @@ const EditUser = () => {
                 placeholder="johnsmith@example.com"
                 name="email"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.email}
               />
             </div>
+            {formik.touched.email && formik.errors.email ? (
+              <div>{formik.errors.email}</div>
+            ) : null}
           </div>
           <div className="w-1/2 px-3 mb-12">
             <div>

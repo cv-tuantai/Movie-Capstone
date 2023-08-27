@@ -3,10 +3,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { actRegister } from "../../../redux/actions/RegisterAction";
+import * as yup from "yup";
 
 export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const registerSchema = yup.object().shape({
+    taiKhoan: yup.string().required("Tài khoản không bỏ trống!"),
+    matKhau: yup.string().required("Mật khẩu không bỏ trống!"),
+    email: yup
+      .string()
+      .required("Email không bỏ trống!")
+      .email("Email không đúng định dạng!"),
+    soDt: yup
+      .string()
+      .length(10, "Số điện thoại có mười chữ số!")
+      .required("Số điện thoại không bỏ trống!"),
+    hoTen: yup.string().required("Họ tên không bỏ trống!"),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -17,6 +32,7 @@ export default function Register() {
       hoTen: "",
       maNhom: "GP01",
     },
+    validationSchema: registerSchema,
     onSubmit: (values) => {
       dispatch(actRegister(values, navigate));
     },
@@ -247,7 +263,7 @@ export default function Register() {
               </div>
               <form onSubmit={formik.handleSubmit}>
                 <div className="flex -mx-3">
-                  <div className="w-1/2 px-3 mb-5">
+                  <div className="w-full px-3 mb-5">
                     <label className="text-xs font-semibold px-1">Họ tên</label>
                     <div className="flex">
                       <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -259,10 +275,16 @@ export default function Register() {
                         placeholder="Họ tên của bạn"
                         name="hoTen"
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                       />
                     </div>
+                    {formik.touched.hoTen && formik.errors.hoTen ? (
+                      <div>{formik.errors.hoTen}</div>
+                    ) : null}
                   </div>
-                  <div className="w-1/2 px-3 mb-5">
+                </div>
+                <div className="flex -mx-3">
+                  <div className="w-full px-3 mb-5">
                     <label className="text-xs font-semibold px-1">
                       Số điện thoại
                     </label>
@@ -271,13 +293,17 @@ export default function Register() {
                         <i className="mdi mdi-account-outline text-gray-400 text-lg" />
                       </div>
                       <input
-                        type="text"
+                        type="number"
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder="SĐT"
                         name="soDt"
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                       />
                     </div>
+                    {formik.touched.soDt && formik.errors.soDt ? (
+                      <div>{formik.errors.soDt}</div>
+                    ) : null}
                   </div>
                 </div>
                 <div className="flex -mx-3">
@@ -295,8 +321,12 @@ export default function Register() {
                         placeholder="johnsmith123"
                         name="taiKhoan"
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                       />
                     </div>
+                    {formik.touched.taiKhoan && formik.errors.taiKhoan ? (
+                      <div>{formik.errors.taiKhoan}</div>
+                    ) : null}
                   </div>
                 </div>
                 <div className="flex -mx-3">
@@ -314,8 +344,12 @@ export default function Register() {
                         placeholder="************"
                         name="matKhau"
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                       />
                     </div>
+                    {formik.touched.matKhau && formik.errors.matKhau ? (
+                      <div>{formik.errors.matKhau}</div>
+                    ) : null}
                   </div>
                 </div>
                 <div className="flex -mx-3">
@@ -331,8 +365,12 @@ export default function Register() {
                         placeholder="johnsmith@example.com"
                         name="email"
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                       />
                     </div>
+                    {formik.touched.email && formik.errors.email ? (
+                      <div>{formik.errors.email}</div>
+                    ) : null}
                   </div>
                 </div>
                 <div className="flex -mx-3">

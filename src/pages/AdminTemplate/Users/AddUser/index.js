@@ -3,10 +3,25 @@ import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { actAddUser } from "../../../../redux/actions/AddUserAction";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 
 const AddUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const addUserSchema = yup.object().shape({
+    taiKhoan: yup.string().required("Tài khoản không bỏ trống!"),
+    matKhau: yup.string().required("Mật khẩu không bỏ trống!"),
+    email: yup
+      .string()
+      .required("Email không bỏ trống!")
+      .email("Email không đúng định dạng!"),
+    soDt: yup
+      .string()
+      .length(10, "Số điện thoại có mười chữ số!")
+      .required("Số điện thoại không bỏ trống!"),
+    hoTen: yup.string().required("Họ tên không bỏ trống!"),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -18,6 +33,7 @@ const AddUser = () => {
       maLoaiNguoiDung: "KhachHang",
       maNhom: "GP01",
     },
+    validationSchema: addUserSchema,
     onSubmit: (values) => {
       dispatch(actAddUser(values, navigate));
     },
@@ -40,8 +56,12 @@ const AddUser = () => {
                 placeholder="Họ tên người dùng"
                 name="hoTen"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
             </div>
+            {formik.touched.hoTen && formik.errors.hoTen ? (
+              <div>{formik.errors.hoTen}</div>
+            ) : null}
           </div>
           <div className="w-1/2 px-3 mb-5">
             <label className="text-xs font-semibold px-1">Số điện thoại</label>
@@ -55,8 +75,12 @@ const AddUser = () => {
                 placeholder="SĐT"
                 name="soDt"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
             </div>
+            {formik.touched.soDt && formik.errors.soDt ? (
+              <div>{formik.errors.soDt}</div>
+            ) : null}
           </div>
         </div>
         <div className="flex -mx-3">
@@ -72,8 +96,12 @@ const AddUser = () => {
                 placeholder="johnsmith123"
                 name="taiKhoan"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
             </div>
+            {formik.touched.taiKhoan && formik.errors.taiKhoan ? (
+              <div>{formik.errors.taiKhoan}</div>
+            ) : null}
           </div>
           <div className="w-1/2 px-3 mb-5">
             <label className="text-xs font-semibold px-1">Mật khẩu</label>
@@ -87,8 +115,12 @@ const AddUser = () => {
                 placeholder="************"
                 name="matKhau"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
             </div>
+            {formik.touched.matKhau && formik.errors.matKhau ? (
+              <div>{formik.errors.matKhau}</div>
+            ) : null}
           </div>
         </div>
 
@@ -105,8 +137,12 @@ const AddUser = () => {
                 placeholder="johnsmith@example.com"
                 name="email"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
             </div>
+            {formik.touched.email && formik.errors.email ? (
+              <div>{formik.errors.email}</div>
+            ) : null}
           </div>
           <div className="w-1/2 px-3 mb-12">
             <div>
