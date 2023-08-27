@@ -10,6 +10,7 @@ export const actRegister = (user, navigate) => {
       .then((result) => {
         if (result.data.statusCode === 200) {
           dispatch(actRegisterSuccess(result.data.content));
+          alert("Đăng ký thành công!");
           navigate("/login", { replace: true });
         }
       })
