@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { actUpdateFilm } from "../../../../redux/actions/UpdateFilmAction";
+import * as yup from "yup";
+
 dayjs.extend(customParseFormat);
 
 const EditFilm = () => {
@@ -14,6 +16,18 @@ const EditFilm = () => {
   const [imgSrc, setImgSrc] = useState("");
   const { id } = useParams();
   const { data } = useSelector((state) => state.GetInfoFilmReducer);
+
+  const editFilmSchema = yup.object().shape({
+    tenPhim: yup.string().required("Tên phim không bỏ trống!"),
+    trailer: yup.string().required("Trailer không bỏ trống!"),
+    moTa: yup.string().required("Mô tả không bỏ trống!"),
+    ngayKhoiChieu: yup.string().required("Ngày khởi chiếu không bỏ trống!"),
+    danhGia: yup
+      .number()
+      .required("Đánh giá không bỏ trống!")
+      .min(1, "Đánh giá từ 1 đến 10")
+      .max(10, "Đánh giá từ 1 đến 10"),
+  });
 
   useEffect(() => {
     dispatch(actGetInfoFilm(id));
@@ -34,6 +48,7 @@ const EditFilm = () => {
       maNhom: "GP09",
       hinhAnh: null,
     },
+    validationSchema: editFilmSchema,
     onSubmit: (values) => {
       //tạo đối tượng formData
       const formData = new FormData();
@@ -95,29 +110,46 @@ const EditFilm = () => {
           <Input
             name="tenPhim"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.tenPhim}
           />
+          {formik.touched.tenPhim && formik.errors.tenPhim ? (
+            <div style={{ color: "red" }}>{formik.errors.tenPhim}</div>
+          ) : null}
         </Form.Item>
         <Form.Item label="Trailer">
           <Input
             name="trailer"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.trailer}
           />
+          {formik.touched.trailer && formik.errors.trailer ? (
+            <div style={{ color: "red" }}>{formik.errors.trailer}</div>
+          ) : null}
         </Form.Item>
         <Form.Item label="Mô tả">
           <Input
             name="moTa"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.moTa}
           />
+          {formik.touched.moTa && formik.errors.moTa ? (
+            <div style={{ color: "red" }}>{formik.errors.moTa}</div>
+          ) : null}
         </Form.Item>
         <Form.Item label="Ngày khởi chiếu">
           <DatePicker
             format="DD/MM/YYYY"
+            name="ngayKhoiChieu"
             onChange={handleChangeDatePicker}
+            onBlur={formik.handleBlur}
             value={dayjs(formik.values.ngayKhoiChieu)}
           />
+          {formik.touched.ngayKhoiChieu && formik.errors.ngayKhoiChieu ? (
+            <div style={{ color: "red" }}>{formik.errors.ngayKhoiChieu}</div>
+          ) : null}
         </Form.Item>
         <Form.Item label="Đang chiếu" valuePropName="checked">
           <Switch
@@ -139,11 +171,16 @@ const EditFilm = () => {
         </Form.Item>
         <Form.Item label="Đánh giá">
           <InputNumber
+            name="danhGia"
             onChange={handleChangeSwitch("danhGia")}
+            onBlur={formik.handleBlur}
             min={1}
             max={10}
             value={formik.values.danhGia}
           />
+          {formik.touched.danhGia && formik.errors.danhGia ? (
+            <div style={{ color: "red" }}>{formik.errors.danhGia}</div>
+          ) : null}
         </Form.Item>
         <Form.Item label="Hình ảnh">
           <input

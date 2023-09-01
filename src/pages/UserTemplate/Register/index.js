@@ -279,7 +279,7 @@ export default function Register() {
                       />
                     </div>
                     {formik.touched.hoTen && formik.errors.hoTen ? (
-                      <div>{formik.errors.hoTen}</div>
+                      <div style={{ color: "red" }}>{formik.errors.hoTen}</div>
                     ) : null}
                   </div>
                 </div>
@@ -302,7 +302,7 @@ export default function Register() {
                       />
                     </div>
                     {formik.touched.soDt && formik.errors.soDt ? (
-                      <div>{formik.errors.soDt}</div>
+                      <div style={{ color: "red" }}>{formik.errors.soDt}</div>
                     ) : null}
                   </div>
                 </div>
@@ -325,7 +325,9 @@ export default function Register() {
                       />
                     </div>
                     {formik.touched.taiKhoan && formik.errors.taiKhoan ? (
-                      <div>{formik.errors.taiKhoan}</div>
+                      <div style={{ color: "red" }}>
+                        {formik.errors.taiKhoan}
+                      </div>
                     ) : null}
                   </div>
                 </div>
@@ -348,7 +350,9 @@ export default function Register() {
                       />
                     </div>
                     {formik.touched.matKhau && formik.errors.matKhau ? (
-                      <div>{formik.errors.matKhau}</div>
+                      <div style={{ color: "red" }}>
+                        {formik.errors.matKhau}
+                      </div>
                     ) : null}
                   </div>
                 </div>
@@ -369,7 +373,7 @@ export default function Register() {
                       />
                     </div>
                     {formik.touched.email && formik.errors.email ? (
-                      <div>{formik.errors.email}</div>
+                      <div style={{ color: "red" }}>{formik.errors.email}</div>
                     ) : null}
                   </div>
                 </div>
